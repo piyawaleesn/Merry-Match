@@ -7,15 +7,17 @@ module.exports = {
   ],
   theme: {
     extend: {
-      backgroundImage: {
-        "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
-        "gradient-conic":
-          "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
+      // backgroundImage: {
+      //   "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
+      //   "gradient-conic":
+      //     "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
+      // },
+      backgroundColor: {
+        main: "#FCFCFE",
       },
-
-      fontFamily: {
-        custom: ["quicksand", "sans"],
-      },
+      // fontFamily: {
+      //   custom: ["quicksand", "sans"],
+      // },
     },
   },
 
@@ -71,9 +73,6 @@ module.exports = {
     100: "#E7FFE7",
     500: "#197418",
   },
-  // fontFamily: {
-  //   Quicksand: ["Quicksand"],
-  // },
 
   plugins: [require("daisyui")],
 };
