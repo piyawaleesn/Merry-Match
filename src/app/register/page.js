@@ -1,5 +1,4 @@
 import React from "react";
-import Mycomponent from "../component/mycomponent";
 import Link from "next/link";
 import supabase from "../utils/db.js";
 
@@ -9,7 +8,6 @@ const Userspage = () => {
     <>
       <p className="bg-main font-bold text-[60px]">Userspage</p>
       <button className="btn btn-outline btn-primary">Primary</button>
-      <Mycomponent />
       <Link href={"/"} className="text-green-300 font-bold mr-3">
         Back
       </Link>
