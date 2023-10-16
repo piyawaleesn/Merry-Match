@@ -16,18 +16,18 @@ export default function Navbar() {
             onClick={() => router.push("/")}
           >
             Merry
-            <span className="text-2xl text-red-500 font-extrabold">Match</span>
+            <span className="text-2xl text-Red-500 font-extrabold">Match</span>
           </p>
           <div className="flex items-center">
-            <p className="text-Purple-800 font-bold px-6 py-8 cursor-pointer hover:text-red-600">
+            <p className="text-Purple-800 font-bold px-6 py-8 cursor-pointer hover:text-Red-600">
               Why Merry Match?
             </p>
-            <p className="text-Purple-800 font-bold px-6 py-8 cursor-pointer hover:text-red-600">
+            <p className="text-Purple-800 font-bold px-6 py-8 cursor-pointer hover:text-Red-600">
               How to Merry
             </p>
 
             <button
-              className="bg-red-500 text-white font-bold w-[90px] h-[48px] rounded-3xl hover:bg-red-400"
+              className="bg-Red-500 text-white font-bold w-[90px] h-[48px] rounded-3xl hover:bg-Red-400"
               type="button"
               onClick={() => router.push("/login")}
             >

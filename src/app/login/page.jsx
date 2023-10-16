@@ -34,7 +34,7 @@ export default function page() {
         </div>
         <div className="w-[453px] ml-[10rem] mt-[5rem]">
           <p className="text-[#7B4429] text-xs font-semibold mb-3">LOGIN</p>
-          <h2 className="text-5xl font-extrabold text-purple-500 mb-6">
+          <h2 className="text-5xl font-extrabold text-Purple-500 mb-6">
             Welcome back to Merry Match
           </h2>
           <Formik
@@ -52,16 +52,16 @@ export default function page() {
                     id="email"
                     name="email"
                     placeholder="Enter Email"
-                    className={`py-3 pr-4 px-3 border border-[1px] border-gray-400 rounded-xl w-[100%] focus:outline-none  focus:border-purple-500 ${
+                    className={`py-3 pr-4 px-3 border border-[1px] border-Gray-400 rounded-xl w-[100%] focus:outline-none  focus:border-Purple-500 ${
                       errors.email && touched.email
-                        ? "border-red-600 border-1"
+                        ? "border-Red-600 border-1"
                         : ""
                     }`}
                   />
                   <ErrorMessage
                     name="email"
                     component="div"
-                    className="text-red-600 text-xs absolute pl-2"
+                    className="text-Red-600 text-xs absolute pl-2"
                   />
                   {errors.email && touched.email ? (
                     <img
@@ -80,16 +80,16 @@ export default function page() {
                     type="password"
                     name="password"
                     placeholder="Enter Password"
-                    className={`py-3 pr-4 px-3 border border-[1px] border-gray-400 rounded-xl w-[100%] focus:outline-none focus:border-purple-500 ${
+                    className={`py-3 pr-4 px-3 border border-[1px] border-Gray-400 rounded-xl w-[100%] focus:outline-none focus:border-Purple-500 ${
                       errors.password && touched.password
-                        ? "border-red-600 border-1"
+                        ? "border-Red-600 border-1"
                         : ""
                     }`}
                   />
                   <ErrorMessage
                     name="password"
                     component="div"
-                    className="text-red-600 text-xs absolute pl-2"
+                    className="text-Red-600 text-xs absolute pl-2"
                   />
                   {errors.password && touched.password ? (
                     <img
@@ -101,7 +101,7 @@ export default function page() {
                     ""
                   )}
                 </div>
-                <button className="w-[100%] bg-red-600 rounded-full py-2 text-white font-bold mt-8">
+                <button className="w-[100%] bg-Red-600 rounded-full py-2 text-white font-bold mt-8 hover:bg-Red-400">
                   Login
                 </button>
               </Form>
@@ -109,7 +109,7 @@ export default function page() {
           </Formik>
           <p className="mt-4">
             Don’t have an account?
-            <span className="font-bold text-red-500 ml-2">
+            <span className="font-bold text-Red-500 ml-2">
               <Link href={"/register"}>Register</Link>
             </span>
           </p>

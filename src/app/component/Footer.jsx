@@ -4,17 +4,17 @@ import Link from "next/link";
 export default function Footer() {
   return (
     <>
-      <footer className="bg-gray-100 w-[100%] h-[371px] flex justify-center items-center">
+      <footer className="bg-Gray-100 w-[100%] h-[371px] flex justify-center items-center">
         <div className="flex flex-col justify-center items-center">
           <p className="text-2xl font-medium cursor-pointer">
             Merry
-            <span className="text-2xl text-red-500 font-extrabold">Match</span>
+            <span className="text-2xl text-Red-500 font-extrabold">Match</span>
           </p>
-          <p className="text-gray-700 font-semibold text-xl mt-5">
+          <p className="text-Gray-700 font-semibold text-xl mt-5">
             New generation of online dating website for everyone
           </p>
           <hr className="w-[78%] h-[2px] mt-8 mb-3" />
-          <p className="text-sm text-gray-600 font-medium">
+          <p className="text-sm text-Gray-600 font-medium">
             copyright ©2022 merrymatch.com All rights reserved
           </p>
           <div className="flex mt-3">

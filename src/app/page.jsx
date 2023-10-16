@@ -40,7 +40,7 @@ export default function Home() {
               src="https://hzhhjgfmkxwvwsdteigk.supabase.co/storage/v1/object/public/user-storage/icons/girl1-landingPage.svg"
               className="relative top-[17rem]"
             />
-            <p className="absolute z-[2] right-[9rem] top-[19rem] bg-red-700 py-3 px-6 text-center font-semibold text-xs text-white rounded-tl-3xl rounded-r-3xl">
+            <p className="absolute z-[2] right-[9rem] top-[19rem] bg-Red-700 py-3 px-6 text-center font-semibold text-xs text-white rounded-tl-3xl rounded-r-3xl">
               Hi! Nice to meet you
             </p>
           </div>
@@ -54,7 +54,7 @@ export default function Home() {
               <br />
               Dont’t forget to get Merry with us
             </p>
-            <button className="text-white font-bold bg-red-500 px-6 py-3 rounded-full mt-12 w-[163px] hover:bg-red-400">
+            <button className="text-white font-bold bg-Red-500 px-6 py-3 rounded-full mt-12 w-[163px] hover:bg-Red-400">
               Start matching!
             </button>
           </div>
@@ -63,7 +63,7 @@ export default function Home() {
               src="https://hzhhjgfmkxwvwsdteigk.supabase.co/storage/v1/object/public/user-storage/icons/girl2-landingPage.svg"
               className="relative top-[-2rem]"
             />
-            <p className="absolute left-[9rem] top-[23.5rem] bg-red-700 py-3 px-6 text-center font-semibold text-xs text-white rounded-l-3xl rounded-tr-3xl">
+            <p className="absolute left-[9rem] top-[23.5rem] bg-Red-700 py-3 px-6 text-center font-semibold text-xs text-white rounded-l-3xl rounded-tr-3xl">
               Nice to meet you too!
             </p>
             <img
@@ -75,7 +75,7 @@ export default function Home() {
       </div>
       <div className="h-[533px] bg-[#160404] flex justify-center">
         <div className="flex flex-col justify-center">
-          <h2 className="text-purple-300 font-extrabold text-5xl mb-6">
+          <h2 className="text-Purple-300 font-extrabold text-5xl mb-6">
             Why Merry Match?
           </h2>
           <p className="text-white w-[549px] text-xl font-semibold">
@@ -100,13 +100,13 @@ export default function Home() {
         </div>
       </div>
       <div className="h-[622px] bg-[#160404] flex flex-col items-center">
-        <h2 className="text-purple-300 font-extrabold text-5xl mb-12 mt-20">
+        <h2 className="text-Purple-300 font-extrabold text-5xl mb-12 mt-20">
           How to Merry
         </h2>
         <div className="flex gap-5 justify-center">
           {boxData.map((data) => (
             <div
-              className="w-[262px] h-[348px] bg-purple-900 rounded-3xl bg-opacity-20 flex flex-col items-center justify-center hover:scale-110 duration-500 cursor-pointer"
+              className="w-[262px] h-[348px] bg-Purple-900 rounded-3xl bg-opacity-20 flex flex-col items-center justify-center hover:scale-110 duration-500 cursor-pointer"
               key={data.id}
             >
               <img src={data.img} className="mt-6" />
@@ -126,7 +126,7 @@ export default function Home() {
             Let’s start finding
             <br /> and matching someone new
           </h2>
-          <button className="text-red-600 font-bold bg-red-100 rounded-full px-6 py-3 mt-12 hover:bg-red-600 hover:text-red-100">
+          <button className="text-Red-600 font-bold bg-Red-100 rounded-full px-6 py-3 mt-12 hover:bg-Red-600 hover:text-Red-100">
             Start matching!
           </button>
         </div>
