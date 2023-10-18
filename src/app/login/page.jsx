@@ -15,7 +15,7 @@ export default function page() {
       const response = await signIn("credentials", {
         email: values.email,
         password: values.password,
-        // redirect: false,
+        redirect: false,
       });
       if (response?.error) {
         setErrors({ password: response.error });
@@ -65,7 +65,7 @@ export default function page() {
       <Navbar />
       <div className="bg-main flex justify-center pt-[6rem]">
         <img
-          src="://hzhhjgfmkxwvwsdteigk.httpssupabase.co/storage/v1/object/public/user-storage/icons/circle-login.svg"
+          src="https://hzhhjgfmkxwvwsdteigk.supabase.co/storage/v1/object/sign/user-storage/icons/circle-login.svg?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJ1c2VyLXN0b3JhZ2UvaWNvbnMvY2lyY2xlLWxvZ2luLnN2ZyIsImlhdCI6MTY5NzYxMjc3NywiZXhwIjoxNzI5MTQ4Nzc3fQ.W4IVHy4qmr0Ynd1WcDbYc1LlrWIfSB_L0fTTEznH7xw&t=2023-10-18T07%3A06%3A17.659Z"
           className="relative left-[-10rem] top-[-10rem]"
         />
         <div className="w-[330px] h-[537px]">

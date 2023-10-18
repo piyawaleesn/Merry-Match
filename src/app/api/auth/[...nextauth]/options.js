@@ -8,7 +8,7 @@ export const options = {
       credentials: {
         email: {
           label: "email",
-          type: "text",
+          type: "email",
           placeholder: "your email",
         },
         password: {
@@ -42,6 +42,7 @@ export const options = {
           id: user.id,
           email: user.email,
           password: user.password,
+          role: user.role,
         };
         return authorizedUser;
       },
@@ -49,37 +50,27 @@ export const options = {
   ],
   pages: {
     signIn: "/login",
+    error: "/login",
   },
-  async authorize(credentials) {
-    if (!credentials?.email || !credentials?.password) {
-      throw new Error("Invalid credentials");
-    }
-    const user = await prisma.user.findUnique({
-      where: {
-        email: credentials.email,
-      },
-    });
-
-    if (!user || !user?.password) {
-      throw new Error("Invalid credentials");
-    }
-
-    const isCorrectedPassword = await bcrypt.compare(
-      credentials.password,
-      user.password
-    );
-    if (!isCorrectedPassword) {
-      throw new Error("Invalid credentials");
-    }
-    const authorizedUser = {
-      id: user.id,
-      email: user.email,
-      password: user.password,
-    };
-    return authorizedUser;
+  callbacks: {
+    session: async ({ session, token, user }) => {
+      if (session?.user) {
+        session.user.id = token.uid;
+      }
+      return session;
+    },
+    jwt: async ({ user, token }) => {
+      if (user) {
+        token.uid = user.id;
+        token.email = user.email;
+      }
+      return token;
+    },
   },
 
   session: {
     strategy: "jwt",
   },
+  secret: process.env.NEXTAUTH_SECRET,
+  debug: process.env.NODE_ENV === "development",
 };

@@ -1,37 +1,59 @@
 "use client";
 import React, { useState } from "react";
 import axios from "axios";
+import { useRouter } from "next/navigation";
 
 const Userspage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
 
-  const registerHandler = async () => {
+  const router = useRouter();
+  const registerHandler = () => {
+    const data = {
+      // name: user.name,
+      // username: user.username,
+      email: email,
+      password: password,
+      // date_of_birth: user.date_of_birth,
+      // location: user.location,
+      // city: user.city,
+      // sexual_identity: user.sexual_identity,
+      // sexual_preference: user.sexual_preference,
+      // recial_preference: user.recial_preference,
+      // meeting_interests: user.meeting_interests,
+      // hobbies_interests: user.hobbies_interests,
+      // profile_image: user.profile_image,
+      //role: user.role
+    };
     try {
-      const data = {
-        email,
-        password,
-      };
-
-      const response = await fetch("/api/register", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      });
-
-      if (response.ok) {
-        const result = await response.json();
-        console.log(result);
-        // Handle successful registration, e.g., redirect to a login page.
-      } else {
-        throw new Error("Failed to register.");
-      }
+      axios
+        .post("api/register", data)
+        .then((response) => console.log(response))
+        .catch((error) => console.log("register error from server", error))
+        .finally(() => router.push("/login"));
     } catch (error) {
-      setError(error.message);
+      console.log("register error", error);
     }
+
+    //   const response = await fetch("/api/register", {
+    //     method: "POST",
+    //     headers: {
+    //       "Content-Type": "application/json",
+    //     },
+    //     body: JSON.stringify(data),
+    //   });
+
+    //   if (response.ok) {
+    //     const result = await response.json();
+    //     console.log(result);
+    //     // Handle successful registration, e.g., redirect to a login page.
+    //   } else {
+    //     throw new Error("Failed to register.");
+    //   }
+    // } catch (error) {
+    //   setError(error.message);
+    // }
   };
 
   return (
@@ -50,12 +72,17 @@ const Userspage = () => {
       <form action="" method="post">
         <div>
           <label htmlFor="">email</label>
-          <input type="email" onChange={(e) => setEmail(e.target.value)} />
+          <input
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
         </div>
         <div>
           <label htmlFor="">password</label>
           <input
             type="password"
+            value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
