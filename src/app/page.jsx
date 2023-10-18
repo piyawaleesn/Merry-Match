@@ -1,3 +1,5 @@
+// "use client"
+
 import Link from "next/link";
 import Navbar from "./component/Navbar";
 import Footer from "./component/Footer";

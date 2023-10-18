@@ -1,5 +1,6 @@
 import "./globals.css";
 import Head from "next/head";
+import Provider from "./component/Provider";
 
 export const metadata = {
   title: "Merry-Match",
@@ -18,7 +19,9 @@ export default function RootLayout({ children }) {
         <link rel="icon" href="../../merry-logo.ico" />
       </Head>
       <html lang="en">
-        <body>{children}</body>
+        <Provider>
+          <body>{children}</body>
+        </Provider>
       </html>
     </>
   );
