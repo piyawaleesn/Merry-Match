@@ -1,7 +1,11 @@
 import CredentialsProvider from "next-auth/providers/credentials";
 import prisma from "@/src/app/lib/prisma";
 import bcrypt from "bcrypt";
-export const options = {
+import { PrismaAdapter } from "@next-auth/prisma-adapter";
+import { compare } from "bcrypt";
+
+export const authOptions = {
+  adapter: PrismaAdapter(prisma),
   providers: [
     CredentialsProvider({
       name: "Credentials",
@@ -19,32 +23,31 @@ export const options = {
       },
       async authorize(credentials) {
         if (!credentials?.email || !credentials?.password) {
-          throw new Error("Invalid credentials");
+          return null;
         }
-        const user = await prisma.user.findUnique({
+        const existingUser = await prisma.users.findUnique({
           where: {
-            email: credentials.email,
+            email: credentials?.email,
           },
         });
-
-        if (!user || !user?.password) {
-          throw new Error("Invalid credentials");
+        if (!existingUser) {
+          return null;
         }
 
-        const isCorrectedPassword = await bcrypt.compare(
+        const passwordMatch = await compare(
           credentials.password,
-          user.password
+          existingUser.password
         );
-        if (!isCorrectedPassword) {
-          throw new Error("Invalid credentials");
+        if (!passwordMatch) {
+          return null;
         }
-        const authorizedUser = {
-          id: user.id,
-          email: user.email,
-          password: user.password,
-          role: user.role,
+
+        return {
+          id: `${existingUser.id}`,
+          username: existingUser.username,
+          email: existingUser.email,
+          role: existingUser.role,
         };
-        return authorizedUser;
       },
     }),
   ],
@@ -53,16 +56,15 @@ export const options = {
     error: "/login",
   },
   callbacks: {
-    session: async ({ session, token, user }) => {
-      if (session?.user) {
-        session.user.id = token.uid;
-      }
+    session: async ({ session, token }) => {
+      session.user = { id: token.id, email: token.email, role: token.role };
       return session;
     },
     jwt: async ({ user, token }) => {
       if (user) {
         token.uid = user.id;
         token.email = user.email;
+        token.role = user.role;
       }
       return token;
     },
@@ -72,5 +74,4 @@ export const options = {
     strategy: "jwt",
   },
   secret: process.env.NEXTAUTH_SECRET,
-  debug: process.env.NODE_ENV === "development",
 };

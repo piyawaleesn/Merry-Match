@@ -10,7 +10,7 @@ import { getSession, signIn } from "next-auth/react";
 export default function page() {
   const router = useRouter();
 
-  const handlerSubmit = async (values, { setErrors }) => {
+  const handlerSubmit = async (values) => {
     try {
       const response = await signIn("credentials", {
         email: values.email,
@@ -18,37 +18,21 @@ export default function page() {
         redirect: false,
       });
       if (response?.error) {
-        setErrors({ password: response.error });
+        console.log("response signin error", response.error);
       } else {
         const session = await getSession();
-
         if (session?.user) {
-          if (session.user.role === "admin") {
-            router.push("/matchlist");
-          } else {
+          if (session.user.role === "user") {
             router.push("/");
+          } else {
+            router.push("/matchlist");
           }
-        } else {
-          console.log("User not found");
         }
       }
     } catch (error) {
       console.log("Login error!!!", error);
     }
   };
-
-  // const handlerLogin = () => {
-  //   try {
-  //     signIn("credentials", {
-  //       email: user.email,
-  //       password: user.password,
-  //       redirect: true,
-  //       callbackUrl: "/",
-  //     });
-  //   } catch (error) {
-  //     console.log("Error while signing in");
-  //   }
-  // };
 
   const initialValues = {
     email: "",
@@ -65,12 +49,12 @@ export default function page() {
       <Navbar />
       <div className="bg-main flex justify-center pt-[6rem]">
         <img
-          src="https://hzhhjgfmkxwvwsdteigk.supabase.co/storage/v1/object/sign/user-storage/icons/circle-login.svg?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJ1c2VyLXN0b3JhZ2UvaWNvbnMvY2lyY2xlLWxvZ2luLnN2ZyIsImlhdCI6MTY5NzYxMjc3NywiZXhwIjoxNzI5MTQ4Nzc3fQ.W4IVHy4qmr0Ynd1WcDbYc1LlrWIfSB_L0fTTEznH7xw&t=2023-10-18T07%3A06%3A17.659Z"
+          src="https://hzhhjgfmkxwvwsdteigk.supabase.co/storage/v1/object/sign/user-storage/icons/circle-login.svg?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJ1c2VyLXN0b3JhZ2UvaWNvbnMvY2lyY2xlLWxvZ2luLnN2ZyIsImlhdCI6MTY5NzY4OTU2MiwiZXhwIjoxNzI5MjI1NTYyfQ.tgDRCAnsmEiRSOp24-H5mWdFDCbsE3Y_9UrHM2uteTU&t=2023-10-19T04%3A26%3A05.233Z"
           className="relative left-[-10rem] top-[-10rem]"
         />
         <div className="w-[330px] h-[537px]">
           <img
-            src="https://hzhhjgfmkxwvwsdteigk.supabase.co/storage/v1/object/public/user-storage/icons/img-login.svg"
+            src="https://hzhhjgfmkxwvwsdteigk.supabase.co/storage/v1/object/sign/user-storage/icons/img-login.svg?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJ1c2VyLXN0b3JhZ2UvaWNvbnMvaW1nLWxvZ2luLnN2ZyIsImlhdCI6MTY5NzY4OTQzMCwiZXhwIjoxNzI5MjI1NDMwfQ.R0yrLBXASOsbH1xNp-oDKfhn9Nm3Jq2ZDiCNyQXNs_s&t=2023-10-19T04%3A23%3A52.312Z"
             className="mt-[3rem]"
           />
         </div>

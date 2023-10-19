@@ -78,6 +78,6 @@ export async function POST(req) {
     );
   } catch (error) {
     console.error("Error registering user", error);
-    return NextResponse.error({ error: "Failed to register" }, { status: 400 });
+    return NextResponse.error({ error: "Failed to register" }, { status: 500 });
   }
 }
