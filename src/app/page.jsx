@@ -1,8 +1,9 @@
-// "use client"
+"use client";
 
-import Link from "next/link";
 import Navbar from "./component/Navbar";
 import Footer from "./component/Footer";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 const boxData = [
   {
@@ -32,6 +33,15 @@ const boxData = [
 ];
 
 export default function Home() {
+  const router = useRouter();
+  const { data: session } = useSession();
+  const handlerStartMatching = () => {
+    if (session) {
+      router.push("/matching");
+    } else {
+      router.push("/login");
+    }
+  };
   return (
     <>
       <Navbar />
@@ -56,7 +66,10 @@ export default function Home() {
               <br />
               Dont’t forget to get Merry with us
             </p>
-            <button className="text-white font-bold bg-Red-500 px-6 py-3 rounded-full mt-12 w-[163px] hover:bg-Red-400">
+            <button
+              className="text-white font-bold bg-Red-500 px-6 py-3 rounded-full mt-12 w-[163px] hover:bg-Red-400"
+              onClick={handlerStartMatching}
+            >
               Start matching!
             </button>
           </div>
@@ -75,8 +88,8 @@ export default function Home() {
           </div>
         </div>
       </div>
-      <div className="h-[533px] bg-[#160404] flex justify-center">
-        <div className="flex flex-col justify-center">
+      <div className="h-[533px] bg-[#160404] flex justify-center pt-[10rem]">
+        <div className="flex flex-col justify-center" id="whyMerry">
           <h2 className="text-Purple-300 font-extrabold text-5xl mb-6">
             Why Merry Match?
           </h2>
@@ -101,7 +114,10 @@ export default function Home() {
           />
         </div>
       </div>
-      <div className="h-[622px] bg-[#160404] flex flex-col items-center">
+      <div
+        className="h-[622px] bg-[#160404] flex flex-col items-center pt-6"
+        id="howToMerry"
+      >
         <h2 className="text-Purple-300 font-extrabold text-5xl mb-12 mt-20">
           How to Merry
         </h2>
@@ -128,7 +144,10 @@ export default function Home() {
             Let’s start finding
             <br /> and matching someone new
           </h2>
-          <button className="text-Red-600 font-bold bg-Red-100 rounded-full px-6 py-3 mt-12 hover:bg-Red-600 hover:text-Red-100">
+          <button
+            className="text-Red-600 font-bold bg-Red-100 rounded-full px-6 py-3 mt-12 hover:bg-Red-600 hover:text-Red-100"
+            onClick={handlerStartMatching}
+          >
             Start matching!
           </button>
         </div>

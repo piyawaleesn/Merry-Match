@@ -13,7 +13,7 @@ export default function Footer() {
           <p className="text-Gray-700 font-semibold text-xl mt-5">
             New generation of online dating website for everyone
           </p>
-          <hr className="w-[1120px] h-[2px] mt-8 mb-3" />
+          <hr className="w-[1120px] h-[2px] mt-8 mb-3 text-Gray-400" />
           <p className="text-sm text-Gray-600 font-medium">
             copyright ©2022 merrymatch.com All rights reserved
           </p>

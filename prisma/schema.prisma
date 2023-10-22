@@ -11,10 +11,10 @@ datasource db {
 }
 
 model Users {
-  id                Int       @id @default(autoincrement())
-  // name              String?
-  // username          String?
-  email             String    @unique
+  id                Int          @id @default(autoincrement())
+  name              String?
+  username          String?
+  email             String       @unique
   password          String
   date_of_birth     DateTime?
   location          String?
@@ -23,9 +23,21 @@ model Users {
   sexual_preference String?
   recial_preference String?
   meeting_interests String?
-  hobbies_interests String?
-  profile_image     String?
-  created_at        DateTime  @default(now())
-  updated_at        DateTime  @updatedAt
-  role              String    @default("user")
+  hobbies_interests String[]
+  profile_image     String[]
+  created_at        DateTime     @default(now())
+  updated_at        DateTime     @updatedAt
+  role              String       @default("user")
+  Complaints        Complaints[]
+}
+
+model Complaints {
+  id          Int      @id @default(autoincrement())
+  issue       String
+  description String
+  status      String   @default("Now")
+  created_at  DateTime @default(now())
+  updated_at  DateTime @updatedAt
+  userId      Int
+  Users       Users    @relation(fields: [userId], references: [id], onDelete: Cascade)
 }

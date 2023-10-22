@@ -25,7 +25,7 @@ export default function page() {
           if (session.user.role === "user") {
             router.push("/");
           } else {
-            router.push("/matchlist");
+            router.push("/admin/matchlist");
           }
         }
       }
@@ -54,7 +54,7 @@ export default function page() {
         />
         <div className="w-[330px] h-[537px]">
           <img
-            src="https://hzhhjgfmkxwvwsdteigk.supabase.co/storage/v1/object/sign/user-storage/icons/img-login.svg?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJ1c2VyLXN0b3JhZ2UvaWNvbnMvaW1nLWxvZ2luLnN2ZyIsImlhdCI6MTY5NzY4OTQzMCwiZXhwIjoxNzI5MjI1NDMwfQ.R0yrLBXASOsbH1xNp-oDKfhn9Nm3Jq2ZDiCNyQXNs_s&t=2023-10-19T04%3A23%3A52.312Z"
+            src="https://hzhhjgfmkxwvwsdteigk.supabase.co/storage/v1/object/sign/user-storage/icons/img-login.svg?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJ1c2VyLXN0b3JhZ2UvaWNvbnMvaW1nLWxvZ2luLnN2ZyIsImlhdCI6MTY5Nzk3MzM0NSwiZXhwIjoxNzI5NTA5MzQ1fQ.dIUMbn462jvMG6pd4HXtXfW8LO_sjJGJXzzTVXNNiv4&t=2023-10-22T11%3A15%3A46.744Z"
             className="mt-[3rem]"
           />
         </div>

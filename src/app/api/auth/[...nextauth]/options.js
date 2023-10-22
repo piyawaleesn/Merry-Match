@@ -43,7 +43,7 @@ export const authOptions = {
         }
 
         return {
-          id: `${existingUser.id}`,
+          id: existingUser.id,
           username: existingUser.username,
           email: existingUser.email,
           role: existingUser.role,
@@ -62,7 +62,7 @@ export const authOptions = {
     },
     jwt: async ({ user, token }) => {
       if (user) {
-        token.uid = user.id;
+        token.id = user.id;
         token.email = user.email;
         token.role = user.role;
       }

@@ -6,7 +6,6 @@ import { useRouter } from "next/navigation";
 const Userspage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState(null);
 
   const router = useRouter();
   const registerHandler = () => {
