@@ -88,7 +88,7 @@ export default function Home() {
           </div>
         </div>
       </div>
-      <div className="h-[533px] bg-[#160404] flex justify-center pt-[10rem]">
+      <div className="h-[533px] bg-[#160404] flex justify-center">
         <div className="flex flex-col justify-center" id="whyMerry">
           <h2 className="text-Purple-300 font-extrabold text-5xl mb-6">
             Why Merry Match?

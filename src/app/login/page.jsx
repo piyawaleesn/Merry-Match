@@ -25,7 +25,7 @@ export default function page() {
           if (session.user.role === "user") {
             router.push("/");
           } else {
-            router.push("/admin/matchlist");
+            router.push("/admin/packageList");
           }
         }
       }
