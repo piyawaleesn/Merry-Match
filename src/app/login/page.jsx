@@ -7,11 +7,15 @@ import * as Yup from "yup";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { getSession, signIn } from "next-auth/react";
+import Loading from "../component/LoadingPage";
+
 export default function page() {
   const router = useRouter();
+  const [loading, setLoading] = useState(false);
 
   const handlerSubmit = async (values) => {
     try {
+      setLoading(true);
       const response = await signIn("credentials", {
         email: values.email,
         password: values.password,
@@ -21,6 +25,7 @@ export default function page() {
         console.log("response signin error", response.error);
       } else {
         const session = await getSession();
+        // setLoading(false);
         if (session?.user) {
           if (session.user.role === "user") {
             router.push("/");
@@ -43,6 +48,10 @@ export default function page() {
     email: Yup.string().email("Email invalid").required("Email is Required"),
     password: Yup.string().required("Password is Required"),
   });
+
+  if (loading) {
+    return <Loading />;
+  }
 
   return (
     <>
