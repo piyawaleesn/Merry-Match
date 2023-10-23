@@ -1,12 +1,44 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import Navbar from "../component/Navbar";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { getSession, signIn } from "next-auth/react";
+import Loading from "../component/LoadingPage";
 
 export default function page() {
+  const router = useRouter();
+  const [loading, setLoading] = useState(false);
+
+  const handlerSubmit = async (values) => {
+    try {
+      setLoading(true);
+      const response = await signIn("credentials", {
+        email: values.email,
+        password: values.password,
+        redirect: false,
+      });
+      if (response?.error) {
+        console.log("response signin error", response.error);
+      } else {
+        const session = await getSession();
+        // setLoading(false);
+        if (session?.user) {
+          if (session.user.role === "user") {
+            router.push("/");
+          } else {
+            router.push("/admin/packageList");
+          }
+        }
+      }
+    } catch (error) {
+      console.log("Login error!!!", error);
+    }
+  };
+
   const initialValues = {
     email: "",
     password: "",
@@ -17,18 +49,21 @@ export default function page() {
     password: Yup.string().required("Password is Required"),
   });
 
-  // const handleSubmit = async(values, {setErrors}) => {}
+  if (loading) {
+    return <Loading />;
+  }
+
   return (
     <>
       <Navbar />
       <div className="bg-main flex justify-center pt-[6rem]">
         <img
-          src="https://hzhhjgfmkxwvwsdteigk.supabase.co/storage/v1/object/public/user-storage/icons/circle-login.svg"
+          src="https://hzhhjgfmkxwvwsdteigk.supabase.co/storage/v1/object/sign/user-storage/icons/circle-login.svg?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJ1c2VyLXN0b3JhZ2UvaWNvbnMvY2lyY2xlLWxvZ2luLnN2ZyIsImlhdCI6MTY5NzY4OTU2MiwiZXhwIjoxNzI5MjI1NTYyfQ.tgDRCAnsmEiRSOp24-H5mWdFDCbsE3Y_9UrHM2uteTU&t=2023-10-19T04%3A26%3A05.233Z"
           className="relative left-[-10rem] top-[-10rem]"
         />
         <div className="w-[330px] h-[537px]">
           <img
-            src="https://hzhhjgfmkxwvwsdteigk.supabase.co/storage/v1/object/public/user-storage/icons/img-login.svg"
+            src="https://hzhhjgfmkxwvwsdteigk.supabase.co/storage/v1/object/sign/user-storage/icons/img-login.svg?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJ1c2VyLXN0b3JhZ2UvaWNvbnMvaW1nLWxvZ2luLnN2ZyIsImlhdCI6MTY5Nzk3MzM0NSwiZXhwIjoxNzI5NTA5MzQ1fQ.dIUMbn462jvMG6pd4HXtXfW8LO_sjJGJXzzTVXNNiv4&t=2023-10-22T11%3A15%3A46.744Z"
             className="mt-[3rem]"
           />
         </div>
@@ -40,7 +75,7 @@ export default function page() {
           <Formik
             initialValues={initialValues}
             validationSchema={validationSchema}
-            // onSubmit={handleSubmit}
+            onSubmit={handlerSubmit}
           >
             {({ errors, touched }) => (
               <Form>
@@ -58,6 +93,7 @@ export default function page() {
                         : ""
                     }`}
                   />
+
                   <ErrorMessage
                     name="email"
                     component="div"
@@ -65,7 +101,7 @@ export default function page() {
                   />
                   {errors.email && touched.email ? (
                     <img
-                      src="https://hzhhjgfmkxwvwsdteigk.supabase.co/storage/v1/object/public/user-storage/icons/error-icon.svg"
+                      src="https://hzhhjgfmkxwvwsdteigk.supabase.co/storage/v1/object/sign/user-storage/icons/error-icon.svg?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJ1c2VyLXN0b3JhZ2UvaWNvbnMvZXJyb3ItaWNvbi5zdmciLCJpYXQiOjE2OTc1NDQyNDQsImV4cCI6MTcyOTA4MDI0NH0.UAF89Hy-GHqQMuVabil7ZIJJ_5EWW-jvwm9Ci41eWv8&t=2023-10-17T12%3A04%3A05.568Z"
                       alt="errorIcon"
                       className="absolute top-[56%] right-[3%]"
                     />
@@ -86,6 +122,7 @@ export default function page() {
                         : ""
                     }`}
                   />
+
                   <ErrorMessage
                     name="password"
                     component="div"
@@ -93,7 +130,7 @@ export default function page() {
                   />
                   {errors.password && touched.password ? (
                     <img
-                      src="https://hzhhjgfmkxwvwsdteigk.supabase.co/storage/v1/object/public/user-storage/icons/error-icon.svg"
+                      src="https://hzhhjgfmkxwvwsdteigk.supabase.co/storage/v1/object/sign/user-storage/icons/error-icon.svg?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJ1c2VyLXN0b3JhZ2UvaWNvbnMvZXJyb3ItaWNvbi5zdmciLCJpYXQiOjE2OTc1NDQyNDQsImV4cCI6MTcyOTA4MDI0NH0.UAF89Hy-GHqQMuVabil7ZIJJ_5EWW-jvwm9Ci41eWv8&t=2023-10-17T12%3A04%3A05.568Z"
                       alt="errorIcon"
                       className="absolute top-[56%] right-[3%]"
                     />
@@ -101,7 +138,10 @@ export default function page() {
                     ""
                   )}
                 </div>
-                <button className="w-[100%] bg-Red-600 rounded-full py-2 text-white font-bold mt-8 hover:bg-Red-400">
+                <button
+                  className="w-[100%] bg-Red-600 rounded-full py-2 text-white font-bold mt-8 hover:bg-Red-400"
+                  type="submit"
+                >
                   Login
                 </button>
               </Form>
