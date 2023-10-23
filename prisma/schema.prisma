@@ -29,6 +29,7 @@ model Users {
   updated_at        DateTime     @updatedAt
   role              String       @default("user")
   Complaints        Complaints[]
+  Packages          Packages[]
 }
 
 model Complaints {
@@ -40,4 +41,15 @@ model Complaints {
   updated_at  DateTime @updatedAt
   userId      Int
   Users       Users    @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Packages {
+  id         Int      @id @default(autoincrement())
+  icon       String
+  name       String
+  limit      Int
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+  userId     Int
+  Users      Users    @relation(fields: [userId], references: [id], onDelete: Cascade)
 }

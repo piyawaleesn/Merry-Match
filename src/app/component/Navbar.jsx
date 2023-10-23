@@ -4,11 +4,13 @@ import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Link } from "react-scroll";
 import { signOut, useSession } from "next-auth/react";
+import Loading from "../component/LoadingPage";
 
 export default function Navbar() {
   const router = useRouter();
   const [isOpenToggle, setIsOpenToggle] = useState(false);
   const [isOpenNotification, setIsOpenNotification] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const { data: session } = useSession();
 
@@ -21,6 +23,23 @@ export default function Navbar() {
     setIsOpenNotification(!isOpenNotification);
     setIsOpenToggle(false);
   };
+
+  const handlerLogout = () => {
+    setLoading(true);
+    signOut({
+      redirect: true,
+      callbackUrl: `${window.location.origin}/login`,
+    });
+  };
+
+  const onClickComplaint = () => {
+    setLoading(true);
+    router.push("/complaint");
+  };
+
+  if (loading) {
+    return <Loading />;
+  }
   return (
     <>
       <div className="fixed left-0 top-0 right-0 z-10">
@@ -90,7 +109,7 @@ export default function Navbar() {
                         </div>
                         <div
                           className="h-[37px] w-full flex items-center pl-3 hover:bg-Purple-100 cursor-pointer"
-                          onClick={() => router.push("/complaint")}
+                          onClick={onClickComplaint}
                         >
                           <img src="https://hzhhjgfmkxwvwsdteigk.supabase.co/storage/v1/object/sign/user-storage/icons/triangle-error-icon.svg?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJ1c2VyLXN0b3JhZ2UvaWNvbnMvdHJpYW5nbGUtZXJyb3ItaWNvbi5zdmciLCJpYXQiOjE2OTc3MzQxMTIsImV4cCI6MTcyOTI3MDExMn0._GryYAsgKCjhmMwnwBM29r9To3D3OImVPx3vPCciTvU&t=2023-10-19T16%3A48%3A32.870Z" />
                           <p className="text-Gray-700 font-medium ml-4">
@@ -99,12 +118,7 @@ export default function Navbar() {
                         </div>
                         <div
                           className="h-[41px] w-full flex items-center pl-3 hover:bg-Purple-100 mt-1 border-t-[1px] border-Gray-200 rounded-b-xl cursor-pointer"
-                          onClick={() =>
-                            signOut({
-                              redirect: true,
-                              callbackUrl: `${window.location.origin}/login`,
-                            })
-                          }
+                          onClick={handlerLogout}
                         >
                           <img src="https://hzhhjgfmkxwvwsdteigk.supabase.co/storage/v1/object/sign/user-storage/icons/logout-icon.svg?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJ1c2VyLXN0b3JhZ2UvaWNvbnMvbG9nb3V0LWljb24uc3ZnIiwiaWF0IjoxNjk3NzM0Mjg4LCJleHAiOjE3MjkyNzAyODh9.jWZ2eD2Y82oKJ5S2QUg1_zlth9058slg2fgS_hYPHHE&t=2023-10-19T16%3A51%3A28.999Z" />
                           <p className="text-Gray-700 font-medium ml-4">

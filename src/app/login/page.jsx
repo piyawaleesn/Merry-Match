@@ -56,7 +56,7 @@ export default function page() {
   return (
     <>
       <Navbar />
-      <div className="bg-main flex justify-center pt-[6rem]">
+      <div className="bg-main flex justify-center pt-[6rem] w-screen">
         <img
           src="https://hzhhjgfmkxwvwsdteigk.supabase.co/storage/v1/object/sign/user-storage/icons/circle-login.svg?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJ1c2VyLXN0b3JhZ2UvaWNvbnMvY2lyY2xlLWxvZ2luLnN2ZyIsImlhdCI6MTY5NzY4OTU2MiwiZXhwIjoxNzI5MjI1NTYyfQ.tgDRCAnsmEiRSOp24-H5mWdFDCbsE3Y_9UrHM2uteTU&t=2023-10-19T04%3A26%3A05.233Z"
           className="relative left-[-10rem] top-[-10rem]"
