@@ -19,3 +19,12 @@ export async function POST(req) {
     return NextResponse.error();
   }
 }
+
+export async function GET() {
+  try {
+    const complaint = await prisma.complaints.findMany();
+    return NextResponse.json(complaint);
+  } catch (error) {
+    return NextResponse.json("Error to GET complaint", error);
+  }
+}
