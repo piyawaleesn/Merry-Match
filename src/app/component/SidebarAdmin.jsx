@@ -23,7 +23,7 @@ export default function SidebarAdmin() {
 
   return (
     <>
-      <div className="w-[18%] h-screen border-Gray-400 border-r bg-white">
+      <div className="w-[18%] bottom-0 border-Gray-400 border-r bg-white">
         <div className="flex flex-col items-center mt-8">
           <h2 className="text-3xl font-semibold">
             Merry <span className="text-Red-500 font-bold">Match</span>
