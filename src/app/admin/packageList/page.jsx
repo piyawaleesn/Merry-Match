@@ -1,13 +1,31 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Sidebar from "../../component/SidebarAdmin";
 import { useRouter } from "next/navigation";
 import Loading from "../../component/LoadingPage";
+import axios from "axios";
 
 export default function page() {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
+  const [data, setData] = useState([]);
+
+  const fetchData = async () => {
+    try {
+      const response = await axios.get("/api/package");
+      setData(response.data);
+      setLoading(false);
+      console.log(response);
+    } catch (error) {
+      console.log("fetch data error", error);
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
 
   const handlerAddPackage = () => {
     setLoading(true);
@@ -74,27 +92,32 @@ export default function page() {
                 </tr>
               </thead>
               <tbody>
-                <tr className="bg-white border-b border-Gray-200 h-[24px]">
-                  <td className="pl-5 py-[2rem]">1</td>
-                  <td className="pl-5">icon</td>
-                  <td className="pl-5">name</td>
-                  <td className="pl-5">limit</td>
-                  <td className="pl-5">created date</td>
-                  <td className="pl-5">updated date</td>
-                  <td>
-                    <div className="flex justify-evenly">
-                      <img
-                        className="inline cursor-pointer"
-                        src="https://hzhhjgfmkxwvwsdteigk.supabase.co/storage/v1/object/sign/user-storage/icons/delete.svg?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJ1c2VyLXN0b3JhZ2UvaWNvbnMvZGVsZXRlLnN2ZyIsImlhdCI6MTY5ODEzNzY4MiwiZXhwIjoxNzI5NjczNjgyfQ.DihXNuk54Lg5180sh3WonSPyJVX5MmBRv4b_4mQQ9aA&t=2023-10-24T08%3A54%3A42.334Z"
-                      />
-                      <img
-                        className="inline cursor-pointer"
-                        src="https://hzhhjgfmkxwvwsdteigk.supabase.co/storage/v1/object/sign/user-storage/icons/edit.svg?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJ1c2VyLXN0b3JhZ2UvaWNvbnMvZWRpdC5zdmciLCJpYXQiOjE2OTgxMzc3MTQsImV4cCI6MTcyOTY3MzcxNH0.FOcamFE3pVbdEhfczykKuIfzZ8d-dTGVc3LL0jva-XE&t=2023-10-24T08%3A55%3A14.721Z"
-                        onClick={clickEdit}
-                      />
-                    </div>
-                  </td>
-                </tr>
+                {data.map((item) => (
+                  <tr
+                    className="bg-white border-b border-Gray-200 h-[24px]"
+                    key={item.id}
+                  >
+                    <td className="pl-5 py-[2rem]">1</td>
+                    <td className="pl-5">icon</td>
+                    <td className="pl-5">name</td>
+                    <td className="pl-5">limit</td>
+                    <td className="pl-5">created date</td>
+                    <td className="pl-5">updated date</td>
+                    <td>
+                      <div className="flex justify-evenly">
+                        <img
+                          className="inline cursor-pointer"
+                          src="https://hzhhjgfmkxwvwsdteigk.supabase.co/storage/v1/object/sign/user-storage/icons/delete.svg?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJ1c2VyLXN0b3JhZ2UvaWNvbnMvZGVsZXRlLnN2ZyIsImlhdCI6MTY5ODEzNzY4MiwiZXhwIjoxNzI5NjczNjgyfQ.DihXNuk54Lg5180sh3WonSPyJVX5MmBRv4b_4mQQ9aA&t=2023-10-24T08%3A54%3A42.334Z"
+                        />
+                        <img
+                          className="inline cursor-pointer"
+                          src="https://hzhhjgfmkxwvwsdteigk.supabase.co/storage/v1/object/sign/user-storage/icons/edit.svg?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJ1c2VyLXN0b3JhZ2UvaWNvbnMvZWRpdC5zdmciLCJpYXQiOjE2OTgxMzc3MTQsImV4cCI6MTcyOTY3MzcxNH0.FOcamFE3pVbdEhfczykKuIfzZ8d-dTGVc3LL0jva-XE&t=2023-10-24T08%3A55%3A14.721Z"
+                          onClick={clickEdit}
+                        />
+                      </div>
+                    </td>
+                  </tr>
+                ))}
               </tbody>
             </table>
           </div>
