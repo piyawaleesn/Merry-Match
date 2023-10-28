@@ -36,12 +36,38 @@ export async function GET(request) {
 
 export async function PUT(request) {
   try {
-    const { name, city } = await request.json();
+    const {
+      name,
+      date_of_birth,
+      location,
+      city,
+      username,
+      email,
+      sexual_identity,
+      sexual_preference,
+      recial_preference,
+      meeting_interests,
+      hobbies_interests,
+      about_me,
+    } = await request.json();
     const id = request.url.split("profile/")[1];
 
     const updatedProfile = await prisma.users.update({
       where: { id: parseInt(id) },
-      data: { name, city },
+      data: {
+        name,
+        date_of_birth,
+        location,
+        city,
+        username,
+        email,
+        sexual_identity,
+        sexual_preference,
+        recial_preference,
+        meeting_interests,
+        hobbies_interests,
+        about_me,
+      },
     });
 
     return NextResponse.json(
