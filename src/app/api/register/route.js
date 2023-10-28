@@ -52,11 +52,13 @@ import { NextResponse } from "next/server";
 //   }
 // }
 
-export async function POST(req) {
-  try {
-    const body = await req.json();
-    const { email, password } = body;
+export async function POST(request) {
+  const body = await request.json();
+  const { name, city, email, password } = body;
 
+  try {
+    const hashedPassword = await hash(password, 10);
+    //validate email
     const existingUserByEmail = await prisma.users.findUnique({
       where: { email: email },
     });
@@ -66,18 +68,57 @@ export async function POST(req) {
         { status: 409 }
       );
     }
-
-    const hashedPassword = await hash(password, 10);
     const newUser = await prisma.users.create({
-      data: { email, password: hashedPassword },
+      data: {
+        name,
+        city,
+        email,
+        password: hashedPassword,
+      },
     });
 
     return NextResponse.json(
-      { user: newUser, message: "User register successfully" },
-      { status: 200 }
+      { message: "Registration has been successfully completed", newUser },
+      {
+        status: 200,
+      }
     );
-  } catch (error) {
-    console.error("Error registering user", error);
-    return NextResponse.error({ error: "Failed to register" }, { status: 500 });
+  } catch (err) {
+    return NextResponse.json(
+      { message: "Error", error: err.message },
+      {
+        status: 500,
+      }
+    );
   }
 }
+
+// export async function POST(req) {
+//   try {
+//     const body = await req.json();
+//     const { email, password } = body;
+
+//     const existingUserByEmail = await prisma.users.findUnique({
+//       where: { email: email },
+//     });
+//     if (existingUserByEmail) {
+//       return NextResponse.json(
+//         { user: null, message: "User with this email already exists" },
+//         { status: 409 }
+//       );
+//     }
+
+//     const hashedPassword = await hash(password, 10);
+//     const newUser = await prisma.users.create({
+//       data: { email, password: hashedPassword },
+//     });
+
+//     return NextResponse.json(
+//       { user: newUser, message: "User register successfully" },
+//       { status: 200 }
+//     );
+//   } catch (error) {
+//     console.error("Error registering user", error);
+//     return NextResponse.error({ error: "Failed to register" }, { status: 500 });
+//   }
+// }
