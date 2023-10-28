@@ -51,7 +51,7 @@ export async function POST(request) {
     });
 
     return NextResponse.json(
-      { message: "Registration has been successfully completed", newUser },
+      { message: "User has been created  successfully", newUser },
       {
         status: 200,
       }
