@@ -18,7 +18,7 @@ export async function GET(request) {
       );
     } else {
       return NextResponse.json(
-        { message: "Profile not found" },
+        { message: "User not found" },
         {
           status: 404,
         }
@@ -51,6 +51,19 @@ export async function PUT(request) {
       about_me,
     } = await request.json();
     const id = request.url.split("profile/")[1];
+
+    const existingProfile = await prisma.users.findUnique({
+      where: { id: parseInt(id) },
+    });
+
+    if (!existingProfile) {
+      return NextResponse.json(
+        { message: "User not found" },
+        {
+          status: 404,
+        }
+      );
+    }
 
     const updatedProfile = await prisma.users.update({
       where: { id: parseInt(id) },

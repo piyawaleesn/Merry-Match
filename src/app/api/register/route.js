@@ -22,7 +22,7 @@ export async function POST(request) {
 
   try {
     const hashedPassword = await hash(password, 10);
-    //validate email
+    //validate check email
     const existingUserByEmail = await prisma.users.findUnique({
       where: { email: email },
     });
