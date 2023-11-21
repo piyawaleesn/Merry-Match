@@ -14,6 +14,7 @@ module.exports = {
       // },
       backgroundColor: {
         main: "#FCFCFE",
+        utility: "#160404",
       },
       // fontFamily: {
       //   custom: ["quicksand", "sans"],

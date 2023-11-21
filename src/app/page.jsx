@@ -4,7 +4,8 @@ import Navbar from "./component/Navbar";
 import Footer from "./component/Footer";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
-
+import Loading from "./component/LoadingPage";
+import { useState } from "react";
 const boxData = [
   {
     id: 1,
@@ -35,13 +36,19 @@ const boxData = [
 export default function Home() {
   const router = useRouter();
   const { data: session } = useSession();
+  const [loading, setLoading] = useState(false);
   const handlerStartMatching = () => {
     if (session) {
+      setLoading(true);
       router.push("/matching");
     } else {
+      setLoading(true);
       router.push("/login");
     }
   };
+  if (loading) {
+    return <Loading />;
+  }
   return (
     <>
       <Navbar />

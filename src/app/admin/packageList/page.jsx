@@ -57,7 +57,6 @@ export default function page() {
                 <input
                   className="border border-Gray-300 rounded-xl focus:outline-none h-[48px] w-[320px] pl-12 focus:border-Red-500"
                   type="text"
-                  placeholder="search..."
                 />
               </div>
               <button
@@ -92,17 +91,17 @@ export default function page() {
                 </tr>
               </thead>
               <tbody>
-                {data.map((item) => (
+                {data.map((item, index) => (
                   <tr
-                    className="bg-white border-b border-Gray-200 h-[24px]"
-                    key={item.id}
+                    className="bg-white border-b border-Gray-200 h-[24px] text-sm"
+                    key={index}
                   >
-                    <td className="pl-5 py-[2rem]">1</td>
-                    <td className="pl-5">icon</td>
-                    <td className="pl-5">name</td>
-                    <td className="pl-5">limit</td>
-                    <td className="pl-5">created date</td>
-                    <td className="pl-5">updated date</td>
+                    <td className="pl-5 py-[2rem]">{index + 1}</td>
+                    <td className="pl-5">{item.icon}</td>
+                    <td className="pl-5">{item.name}</td>
+                    <td className="pl-5">{item.limit}</td>
+                    <td className="pl-5">{item.created_at}</td>
+                    <td className="pl-5">{item.updated_at}</td>
                     <td>
                       <div className="flex justify-evenly">
                         <img

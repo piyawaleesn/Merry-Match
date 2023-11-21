@@ -16,7 +16,7 @@ model Users {
   username          String?
   email             String       @unique
   password          String
-  date_of_birth     DateTime?
+  date_of_birth     DateTime?    @db.Date
   location          String?
   city              String?
   sexual_identity   String?
@@ -25,6 +25,7 @@ model Users {
   meeting_interests String?
   hobbies_interests String[]
   profile_image     String[]
+  about_me          String?
   created_at        DateTime     @default(now())
   updated_at        DateTime     @updatedAt
   role              String       @default("user")

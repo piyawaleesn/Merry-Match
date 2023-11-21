@@ -68,7 +68,9 @@ export default function Navbar() {
                 </button>
                 {isOpenNotification ? (
                   <>
-                    <div className="absolute top-[5rem] right-[12rem] w-[251px] h-[214px] bg-white rounded-xl shadow-2xl"></div>
+                    <div className="absolute top-[5rem] right-[12rem] w-[251px] h-[214px] bg-white rounded-xl shadow-2xl">
+                      
+                    </div>
                   </>
                 ) : (
                   ""
