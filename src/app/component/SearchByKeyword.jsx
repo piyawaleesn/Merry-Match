@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import RangeSlider from "./RangeSlider";
 
 export default function SearchByKeyword() {
   const [defaultChecked, setDefaultChecked] = useState(false);
@@ -66,6 +67,22 @@ export default function SearchByKeyword() {
               Non-bunary people
             </label>
           </div>
+        </div>
+        <div className="flex flex-col">
+          <h4 className="text-[#191C77] font-bold text-lg mt-12 mb-4">
+            Age Range
+          </h4>
+          <div className="flex justify-center">
+            <RangeSlider />
+          </div>
+        </div>
+        <div className="flex justify-center mt-8">
+          <button className="text-Red-500 font-bold border border-Red-500 rounded-full px-[1rem] py-[0.5rem] mr-2 hover:bg-Red-500 hover:text-white">
+            Clear
+          </button>
+          <button className="bg-Red-500 text-white font-bold border border-Red-500 rounded-full px-[1rem] py-[0.5rem] hover:bg-white hover:text-Red-500">
+            Search
+          </button>
         </div>
       </div>
     </div>

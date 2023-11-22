@@ -37,6 +37,11 @@ export default function Navbar() {
     router.push("/complaint");
   };
 
+  const onClickStartMatching = () => {
+    setLoading(true);
+    router.push("/matching");
+  };
+
   if (loading) {
     return <Loading />;
   }
@@ -56,7 +61,7 @@ export default function Navbar() {
               <div className="flex items-center">
                 <p
                   className="text-Purple-800 font-bold px-6 py-8 cursor-pointer hover:text-Red-600"
-                  onClick={() => router.push("/matching")}
+                  onClick={onClickStartMatching}
                 >
                   Start Matching!
                 </p>
@@ -68,9 +73,7 @@ export default function Navbar() {
                 </button>
                 {isOpenNotification ? (
                   <>
-                    <div className="absolute top-[5rem] right-[12rem] w-[251px] h-[214px] bg-white rounded-xl shadow-2xl">
-                      
-                    </div>
+                    <div className="absolute top-[5rem] right-[12rem] w-[251px] h-[214px] bg-white rounded-xl shadow-2xl"></div>
                   </>
                 ) : (
                   ""
