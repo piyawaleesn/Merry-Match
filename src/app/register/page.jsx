@@ -2,6 +2,9 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/navigation";
+import Navbar from "../component/Navbar";
+import FooterRegister from "../component/FooterRegister";
+import RegisterStep1 from "../component/RegisterStep1";
 
 const Userspage = () => {
   const [email, setEmail] = useState("");
@@ -67,28 +70,35 @@ const Userspage = () => {
     //   </Link>
     // </>
 
-    <div className="bg-white">
-      <form action="" method="post">
-        <div>
-          <label htmlFor="">email</label>
-          <input
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-        </div>
-        <div>
-          <label htmlFor="">password</label>
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </div>
-        <button type="submit" onClick={registerHandler}>
-          submit
-        </button>
-      </form>
+    // <div className="bg-white">
+    //   <form action="" method="post">
+    //     <div>
+    //       <label htmlFor="">email</label>
+    //       <input
+    //         type="email"
+    //         value={email}
+    //         onChange={(e) => setEmail(e.target.value)}
+    //       />
+    //     </div>
+    //     <div>
+    //       <label htmlFor="">password</label>
+    //       <input
+    //         type="password"
+    //         value={password}
+    //         onChange={(e) => setPassword(e.target.value)}
+    //       />
+    //     </div>
+    //     <button type="submit" onClick={registerHandler}>
+    //       submit
+    //     </button>
+    //   </form>
+    // </div>
+    <div className="bg-main h-screen w-screen overflow-hidden flex flex-col">
+      <Navbar />
+      <div className="w-[100px] h-[100px] rounded-full bg-Beige-100 absolute top-[25%] left-[-1%]"></div>
+      <div className="w-[8px] h-[8px] rounded-full bg-Beige-700 absolute top-[44%] left-[7%]"></div>
+      <RegisterStep1 />
+      <FooterRegister />
     </div>
   );
 };
