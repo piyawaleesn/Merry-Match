@@ -5,6 +5,8 @@ import { useRouter } from "next/navigation";
 import Navbar from "../component/Navbar";
 import FooterRegister from "../component/FooterRegister";
 import RegisterStep1 from "../component/RegisterStep1";
+import RegisterStep2 from "../component/RegisterStep2";
+import RegisterStep3 from "../component/RegisterStep3";
 
 const Userspage = () => {
   const [email, setEmail] = useState("");
@@ -58,6 +60,16 @@ const Userspage = () => {
     // }
   };
 
+  const [currentStep, setCurrentStep] = useState(1);
+  const clickNextStep = () => {
+    setCurrentStep(currentStep + 1);
+  };
+
+  const clickBack = () => {
+    if (currentStep > 1) {
+      setCurrentStep(currentStep - 1);
+    }
+  };
   return (
     // <>
     //   <p className="bg-main font-bold text-[60px]">Userspage</p>
@@ -97,8 +109,14 @@ const Userspage = () => {
       <Navbar />
       <div className="w-[100px] h-[100px] rounded-full bg-Beige-100 absolute top-[25%] left-[-1%]"></div>
       <div className="w-[8px] h-[8px] rounded-full bg-Beige-700 absolute top-[44%] left-[7%]"></div>
-      <RegisterStep1 />
-      <FooterRegister />
+      {currentStep === 1 && <RegisterStep1 />}
+      {currentStep === 2 && <RegisterStep2 />}
+      {currentStep === 3 && <RegisterStep3 />}
+      <FooterRegister
+        onNextStep={clickNextStep}
+        onBack={() => clickBack()}
+        currentStep={currentStep}
+      />
     </div>
   );
 };

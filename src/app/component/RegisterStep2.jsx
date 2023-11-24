@@ -1,9 +1,8 @@
 import React from "react";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import LocationData from "../MockData";
 
-export default function RegisterStep1() {
+export default function RegisterStep2() {
   return (
     <div className="flex justify-center">
       <div className="w-[930px] h-[500px] flex flex-col mt-[130px]">
@@ -15,20 +14,20 @@ export default function RegisterStep1() {
             </h2>
           </div>
           <div className="flex items-end">
-            <div className="w-[240px] h-[74px] border border-Purple-500 rounded-xl flex justify-start items-center p-3">
-              <div className="w-[42px] h-[42px] bg-Gray-200 rounded-xl text-Purple-500 font-bold flex justify-center items-center mr-4">
+            <div className="h-[74px] w-[74px] border border-Gray-300 rounded-xl flex justify-center items-center">
+              <div className="bg-Gray-200 text-Gray-600 font-bold w-[42px] h-[42px] rounded-xl flex justify-center items-center">
                 1
               </div>
-              <div className="flex flex-col">
-                <p className="text-Gray-700 text-xs font-medium">Step 1/3</p>
-                <p className="text-Purple-500 font-extrabold">
-                  Basic Information
-                </p>
-              </div>
             </div>
-            <div className="h-[74px] w-[74px] border border-Gray-300 rounded-xl flex justify-center items-center mr-2 ml-2">
-              <div className="bg-Gray-200 text-Gray-600 font-bold w-[42px] h-[42px] rounded-xl flex justify-center items-center">
+            <div className="w-[260px] h-[74px] border border-Purple-500 rounded-xl flex justify-start items-center p-3 mr-2 ml-2">
+              <div className="w-[42px] h-[42px] bg-Gray-200 rounded-xl text-Purple-500 font-bold flex justify-center items-center mr-4">
                 2
+              </div>
+              <div className="flex flex-col">
+                <p className="text-Gray-700 text-xs font-medium">Step 2/3</p>
+                <p className="text-Purple-500 font-extrabold">
+                  Identities and Interests
+                </p>
               </div>
             </div>
             <div className="h-[74px] w-[74px] border border-Gray-300 rounded-xl flex justify-center items-center">
@@ -40,7 +39,7 @@ export default function RegisterStep1() {
         </div>
         <div className="flex flex-col mt-[2.5rem]">
           <h4 className="text-xl text-Purple-500 font-bold mb-[1rem]">
-            Basic Information
+            Identities and Interests
           </h4>
           <Formik>
             <Form>
@@ -75,16 +74,6 @@ export default function RegisterStep1() {
                   <label htmlFor="name" className="text-sm">
                     Location
                   </label>
-                  <select className="border-Gray-400 border rounded-md w-[420px] h-[40px] pl-2 text-sm">
-                    <option value="" hidden>
-                      --Select Location--
-                    </option>
-                    {LocationData?.map((location, index) => (
-                      <option key={index} value={location}>
-                        {location}
-                      </option>
-                    ))}
-                  </select>
                 </div>
                 <div className="flex flex-col ml-[15px]">
                   <label htmlFor="name" className="text-sm">
