@@ -1,9 +1,27 @@
-import React from "react";
-import { Formik, Field, Form, ErrorMessage } from "formik";
-import * as Yup from "yup";
-import LocationData from "../MockData";
+import React, { useState } from "react";
+import LocationData from "../mockLocation";
 
 export default function RegisterStep1() {
+  const [name, setName] = useState("");
+  const [birthDate, setBirthDate] = useState("");
+  const [location, setLocation] = useState("");
+  const [city, setCity] = useState("");
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+
+  const [selectedLocation, setSelectedLocation] = useState("");
+  const [selectedCity, setSelectedCity] = useState("");
+
+  const handleLocationChange = (e) => {
+    setSelectedLocation(e.target.value);
+    setSelectedCity("");
+  };
+
+  const handleCityChange = (e) => {
+    setSelectedCity(e.target.value);
+  };
   return (
     <div className="flex justify-center">
       <div className="w-[930px] h-[500px] flex flex-col mt-[130px]">
@@ -42,117 +60,131 @@ export default function RegisterStep1() {
           <h4 className="text-xl text-Purple-500 font-bold mb-[1rem]">
             Basic Information
           </h4>
-          <Formik>
-            <Form>
-              <div className="flex">
-                <div className="flex flex-col">
-                  <label htmlFor="name" className="text-sm">
-                    Name
-                  </label>
-                  <Field
-                    type="text"
-                    id="name"
-                    name="name"
-                    placeholder="John Doe"
-                    className="border-Gray-400 border rounded-md w-[420px] h-[40px] pl-2 text-sm"
-                  />
-                </div>
-                <div className="flex flex-col ml-[15px]">
-                  <label htmlFor="name" className="text-sm">
-                    Date Of Birth
-                  </label>
-                  <Field
-                    type="text"
-                    id="name"
-                    name="name"
-                    placeholder="ต้องเปลี่ยนเป็นวันเกิด"
-                    className="border-Gray-400 border rounded-md w-[420px] h-[40px] pl-2 text-sm"
-                  />
-                </div>
+          <form>
+            <div className="flex">
+              <div className="flex flex-col">
+                <label htmlFor="name" className="text-sm">
+                  Name
+                </label>
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  placeholder="John Doe"
+                  className="border-Gray-400 border rounded-md w-[420px] h-[40px] pl-2 text-sm"
+                />
               </div>
-              <div className="flex mt-5">
-                <div className="flex flex-col">
-                  <label htmlFor="name" className="text-sm">
-                    Location
-                  </label>
-                  <select className="border-Gray-400 border rounded-md w-[420px] h-[40px] pl-2 text-sm">
-                    <option value="" hidden>
-                      --Select Location--
-                    </option>
-                    {LocationData?.map((location, index) => (
-                      <option key={index} value={location}>
-                        {location}
+              <div className="flex flex-col ml-[15px]">
+                <label htmlFor="birthDate" className="text-sm">
+                  Date Of Birth
+                </label>
+                <input
+                  type="date"
+                  className="border-Gray-400 border rounded-md w-[420px] h-[40px]"
+                />
+              </div>
+            </div>
+            <div className="flex mt-5">
+              <div className="flex flex-col">
+                <label htmlFor="name" className="text-sm">
+                  Location
+                </label>
+                <select
+                  id="location"
+                  name="location"
+                  className="border-Gray-400 border rounded-md w-[420px] h-[40px] pl-2 text-sm focus:outline-none focus:border-Red-500"
+                  value={selectedLocation}
+                  onChange={handleLocationChange}
+                >
+                  <option value="" hidden>
+                    --Select Location--
+                  </option>
+                  {LocationData &&
+                    LocationData.map((location, country_id) => (
+                      <option key={country_id} value={location.country_name}>
+                        {location.country_name}
                       </option>
                     ))}
-                  </select>
-                </div>
-                <div className="flex flex-col ml-[15px]">
-                  <label htmlFor="name" className="text-sm">
-                    City
-                  </label>
-                  <Field
-                    type="text"
-                    id="name"
-                    name="name"
-                    placeholder="ต้องเปลี่ยนเป็นวันเกิด"
-                    className="border-Gray-400 border rounded-md w-[420px] h-[40px] pl-2 text-sm"
-                  />
-                </div>
+                </select>
               </div>
-              <div className="flex mt-5">
-                <div className="flex flex-col">
-                  <label htmlFor="name" className="text-sm">
-                    Username
-                  </label>
-                  <Field
-                    type="text"
-                    id="name"
-                    name="name"
-                    placeholder="At least 6 charactor"
-                    className="border-Gray-400 border rounded-md w-[420px] h-[40px] pl-2 text-sm"
-                  />
-                </div>
-                <div className="flex flex-col ml-[15px]">
-                  <label htmlFor="name" className="text-sm">
-                    Email
-                  </label>
-                  <Field
-                    type="text"
-                    id="name"
-                    name="name"
-                    placeholder="name@website.com"
-                    className="border-Gray-400 border rounded-md w-[420px] h-[40px] pl-2 text-sm"
-                  />
-                </div>
+              <div className="flex flex-col ml-[15px]">
+                <label htmlFor="city" className="text-sm">
+                  City
+                </label>
+                <select
+                  id="city"
+                  name="city"
+                  className="border-Gray-400 border rounded-md w-[420px] h-[40px] pl-2 text-sm"
+                  value={selectedCity}
+                  onChange={handleCityChange}
+                >
+                  <option value="" hidden>
+                    --Select City--
+                  </option>
+                  {selectedLocation &&
+                    LocationData.find(
+                      (location) => location.country_name === selectedLocation
+                    )?.states.map((state) => (
+                      <option key={state.state_id} value={state.state_name}>
+                        {state.state_name}
+                      </option>
+                    ))}
+                </select>
               </div>
-              <div className="flex mt-5">
-                <div className="flex flex-col">
-                  <label htmlFor="name" className="text-sm">
-                    Password
-                  </label>
-                  <Field
-                    type="text"
-                    id="name"
-                    name="name"
-                    placeholder="At least 8 charactor"
-                    className="border-Gray-400 border rounded-md w-[420px] h-[40px] pl-2 text-sm"
-                  />
-                </div>
-                <div className="flex flex-col ml-[15px]">
-                  <label htmlFor="name" className="text-sm">
-                    Confirm Password
-                  </label>
-                  <Field
-                    type="text"
-                    id="name"
-                    name="name"
-                    placeholder="At least 8 charactor"
-                    className="border-Gray-400 border rounded-md w-[420px] h-[40px] pl-2 text-sm"
-                  />
-                </div>
+            </div>
+            <div className="flex mt-5">
+              <div className="flex flex-col">
+                <label htmlFor="name" className="text-sm">
+                  Username
+                </label>
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  placeholder="At least 6 charactor"
+                  className="border-Gray-400 border rounded-md w-[420px] h-[40px] pl-2 text-sm"
+                />
               </div>
-            </Form>
-          </Formik>
+              <div className="flex flex-col ml-[15px]">
+                <label htmlFor="name" className="text-sm">
+                  Email
+                </label>
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  placeholder="name@website.com"
+                  className="border-Gray-400 border rounded-md w-[420px] h-[40px] pl-2 text-sm"
+                />
+              </div>
+            </div>
+            <div className="flex mt-5">
+              <div className="flex flex-col">
+                <label htmlFor="name" className="text-sm">
+                  Password
+                </label>
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  placeholder="At least 8 charactor"
+                  className="border-Gray-400 border rounded-md w-[420px] h-[40px] pl-2 text-sm"
+                />
+              </div>
+              <div className="flex flex-col ml-[15px]">
+                <label htmlFor="name" className="text-sm">
+                  Confirm Password
+                </label>
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  placeholder="At least 8 charactor"
+                  className="border-Gray-400 border rounded-md w-[420px] h-[40px] pl-2 text-sm"
+                />
+              </div>
+            </div>
+          </form>
         </div>
       </div>
     </div>

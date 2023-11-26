@@ -1,8 +1,8 @@
-import React from "react";
-import { Formik, Field, Form, ErrorMessage } from "formik";
-import * as Yup from "yup";
+import React, { useState } from "react";
+import { TagsInput } from "react-tag-input-component";
 
 export default function RegisterStep2() {
+  const [selected, setSelected] = useState([]);
   return (
     <div className="flex justify-center">
       <div className="w-[930px] h-[500px] flex flex-col mt-[130px]">
@@ -41,107 +41,78 @@ export default function RegisterStep2() {
           <h4 className="text-xl text-Purple-500 font-bold mb-[1rem]">
             Identities and Interests
           </h4>
-          <Formik>
-            <Form>
-              <div className="flex">
-                <div className="flex flex-col">
-                  <label htmlFor="name" className="text-sm">
-                    Name
-                  </label>
-                  <Field
-                    type="text"
-                    id="name"
-                    name="name"
-                    placeholder="John Doe"
-                    className="border-Gray-400 border rounded-md w-[420px] h-[40px] pl-2 text-sm"
-                  />
-                </div>
-                <div className="flex flex-col ml-[15px]">
-                  <label htmlFor="name" className="text-sm">
-                    Date Of Birth
-                  </label>
-                  <Field
-                    type="text"
-                    id="name"
-                    name="name"
-                    placeholder="ต้องเปลี่ยนเป็นวันเกิด"
-                    className="border-Gray-400 border rounded-md w-[420px] h-[40px] pl-2 text-sm"
-                  />
-                </div>
+          <form>
+            <div className="flex">
+              <div className="flex flex-col">
+                <label htmlFor="name" className="text-sm">
+                  Sexual dentities
+                </label>
+                <select className="border-Gray-400 border rounded-md w-[420px] h-[40px] pl-2 text-sm focus:outline-none focus:border-Red-500">
+                  <option value="" hidden>
+                    --Select Sexual Identities--
+                  </option>
+                  <option value="male">Male</option>
+                  <option value="female">Female</option>
+                  <option value="lgbtq+">LGBTQ+</option>
+                </select>
               </div>
-              <div className="flex mt-5">
-                <div className="flex flex-col">
-                  <label htmlFor="name" className="text-sm">
-                    Location
-                  </label>
-                </div>
-                <div className="flex flex-col ml-[15px]">
-                  <label htmlFor="name" className="text-sm">
-                    City
-                  </label>
-                  <Field
-                    type="text"
-                    id="name"
-                    name="name"
-                    placeholder="ต้องเปลี่ยนเป็นวันเกิด"
-                    className="border-Gray-400 border rounded-md w-[420px] h-[40px] pl-2 text-sm"
-                  />
-                </div>
+              <div className="flex flex-col ml-[15px]">
+                <label htmlFor="name" className="text-sm">
+                  Sexual preferences
+                </label>
+                <select className="border-Gray-400 border rounded-md w-[420px] h-[40px] pl-2 text-sm focus:outline-none focus:border-Red-500">
+                  <option value="" hidden>
+                    --Select Sexual Preferences--
+                  </option>
+                  <option value="male">Male</option>
+                  <option value="female">Female</option>
+                  <option value="lgbtq+">LGBTQ+</option>
+                </select>
               </div>
-              <div className="flex mt-5">
-                <div className="flex flex-col">
-                  <label htmlFor="name" className="text-sm">
-                    Username
-                  </label>
-                  <Field
-                    type="text"
-                    id="name"
-                    name="name"
-                    placeholder="At least 6 charactor"
-                    className="border-Gray-400 border rounded-md w-[420px] h-[40px] pl-2 text-sm"
-                  />
-                </div>
-                <div className="flex flex-col ml-[15px]">
-                  <label htmlFor="name" className="text-sm">
-                    Email
-                  </label>
-                  <Field
-                    type="text"
-                    id="name"
-                    name="name"
-                    placeholder="name@website.com"
-                    className="border-Gray-400 border rounded-md w-[420px] h-[40px] pl-2 text-sm"
-                  />
-                </div>
+            </div>
+            <div className="flex mt-5">
+              <div className="flex flex-col">
+                <label htmlFor="name" className="text-sm">
+                  Racial preferences
+                </label>
+                <select className="border-Gray-400 border rounded-md w-[420px] h-[40px] pl-2 text-sm focus:outline-none focus:border-Red-500">
+                  <option value="" hidden>
+                    --Select Racial Preferences--
+                  </option>
+                  <option value="asian">Asian</option>
+                  <option value="american">American</option>
+                  <option value="europien">Europien</option>
+                </select>
               </div>
-              <div className="flex mt-5">
-                <div className="flex flex-col">
-                  <label htmlFor="name" className="text-sm">
-                    Password
-                  </label>
-                  <Field
-                    type="text"
-                    id="name"
-                    name="name"
-                    placeholder="At least 8 charactor"
-                    className="border-Gray-400 border rounded-md w-[420px] h-[40px] pl-2 text-sm"
-                  />
-                </div>
-                <div className="flex flex-col ml-[15px]">
-                  <label htmlFor="name" className="text-sm">
-                    Confirm Password
-                  </label>
-                  <Field
-                    type="text"
-                    id="name"
-                    name="name"
-                    placeholder="At least 8 charactor"
-                    className="border-Gray-400 border rounded-md w-[420px] h-[40px] pl-2 text-sm"
-                  />
-                </div>
+              <div className="flex flex-col ml-[15px]">
+                <label htmlFor="name" className="text-sm">
+                  Meeting interests
+                </label>
+                <select className="border-Gray-400 border rounded-md w-[420px] h-[40px] pl-2 text-sm focus:outline-none focus:border-Red-500">
+                  <option value="" hidden>
+                    --Select Meeting Interests--
+                  </option>
+                  <option value="friend">Friend</option>
+                  <option value="ons">ONS</option>
+                  <option value="fwb">FWB</option>
+                  <option value="long-term">Long-term relationship</option>
+                </select>
               </div>
-            </Form>
-          </Formik>
+            </div>
+
+            <div className="flex flex-col mt-5">
+              <label htmlFor="text" className="text-sm">
+                Hobbies / Interests (Maximum 10)
+              </label>
+              <div className="w-[855px] h-[40px]">
+                <TagsInput
+                  value={selected}
+                  onChange={setSelected}
+                  name="tags"
+                />
+              </div>
+            </div>
+          </form>
         </div>
       </div>
     </div>

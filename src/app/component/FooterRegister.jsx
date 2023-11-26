@@ -14,12 +14,18 @@ export default function FooterRegister({ onNextStep, onBack, currentStep }) {
           >
             Back
           </button>
-          <button
-            className="bg-Red-500 border border-Red-500 rounded-3xl w-[120px] h-[45px] text-white font-bold hover:bg-Red-600"
-            onClick={onNextStep}
-          >
-            Next step
-          </button>
+          {currentStep === 3 ? (
+            <button className="bg-Red-500 border border-Red-500 rounded-3xl w-[120px] h-[45px] text-white font-bold hover:bg-Red-600">
+              Confirm
+            </button>
+          ) : (
+            <button
+              className="bg-Red-500 border border-Red-500 rounded-3xl w-[120px] h-[45px] text-white font-bold hover:bg-Red-600"
+              onClick={onNextStep}
+            >
+              Next step
+            </button>
+          )}
         </div>
       </div>
     </div>
