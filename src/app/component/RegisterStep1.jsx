@@ -11,16 +11,13 @@ export default function RegisterStep1() {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
-  const [selectedLocation, setSelectedLocation] = useState("");
-  const [selectedCity, setSelectedCity] = useState("");
-
   const handleLocationChange = (e) => {
-    setSelectedLocation(e.target.value);
-    setSelectedCity("");
+    setLocation(e.target.value);
+    setCity("");
   };
 
   const handleCityChange = (e) => {
-    setSelectedCity(e.target.value);
+    setCity(e.target.value);
   };
   return (
     <div className="flex justify-center">
@@ -72,6 +69,7 @@ export default function RegisterStep1() {
                   name="name"
                   placeholder="John Doe"
                   className="border-Gray-400 border rounded-md w-[420px] h-[40px] pl-2 text-sm"
+                  required
                 />
               </div>
               <div className="flex flex-col ml-[15px]">
@@ -81,6 +79,7 @@ export default function RegisterStep1() {
                 <input
                   type="date"
                   className="border-Gray-400 border rounded-md w-[420px] h-[40px]"
+                  required
                 />
               </div>
             </div>
@@ -93,16 +92,17 @@ export default function RegisterStep1() {
                   id="location"
                   name="location"
                   className="border-Gray-400 border rounded-md w-[420px] h-[40px] pl-2 text-sm focus:outline-none focus:border-Red-500"
-                  value={selectedLocation}
+                  value={location}
                   onChange={handleLocationChange}
+                  required
                 >
                   <option value="" hidden>
                     --Select Location--
                   </option>
                   {LocationData &&
-                    LocationData.map((location, country_id) => (
-                      <option key={country_id} value={location.country_name}>
-                        {location.country_name}
+                    LocationData.map((country, country_id) => (
+                      <option key={country_id} value={country.country_name}>
+                        {country.country_name}
                       </option>
                     ))}
                 </select>
@@ -115,15 +115,16 @@ export default function RegisterStep1() {
                   id="city"
                   name="city"
                   className="border-Gray-400 border rounded-md w-[420px] h-[40px] pl-2 text-sm"
-                  value={selectedCity}
+                  value={city}
                   onChange={handleCityChange}
+                  required
                 >
                   <option value="" hidden>
                     --Select City--
                   </option>
-                  {selectedLocation &&
+                  {location &&
                     LocationData.find(
-                      (location) => location.country_name === selectedLocation
+                      (country) => country.country_name === location
                     )?.states.map((state) => (
                       <option key={state.state_id} value={state.state_name}>
                         {state.state_name}
@@ -143,6 +144,7 @@ export default function RegisterStep1() {
                   name="name"
                   placeholder="At least 6 charactor"
                   className="border-Gray-400 border rounded-md w-[420px] h-[40px] pl-2 text-sm"
+                  required
                 />
               </div>
               <div className="flex flex-col ml-[15px]">
@@ -155,6 +157,7 @@ export default function RegisterStep1() {
                   name="name"
                   placeholder="name@website.com"
                   className="border-Gray-400 border rounded-md w-[420px] h-[40px] pl-2 text-sm"
+                  required
                 />
               </div>
             </div>
@@ -169,6 +172,7 @@ export default function RegisterStep1() {
                   name="name"
                   placeholder="At least 8 charactor"
                   className="border-Gray-400 border rounded-md w-[420px] h-[40px] pl-2 text-sm"
+                  required
                 />
               </div>
               <div className="flex flex-col ml-[15px]">
@@ -181,6 +185,7 @@ export default function RegisterStep1() {
                   name="name"
                   placeholder="At least 8 charactor"
                   className="border-Gray-400 border rounded-md w-[420px] h-[40px] pl-2 text-sm"
+                  required
                 />
               </div>
             </div>
