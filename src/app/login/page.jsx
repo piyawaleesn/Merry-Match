@@ -49,6 +49,10 @@ export default function page() {
     password: Yup.string().required("Password is Required"),
   });
 
+  const clickRegister = () => {
+    setLoading(true);
+    router.push("/register");
+  };
   if (loading) {
     return <Loading />;
   }
@@ -149,8 +153,11 @@ export default function page() {
           </Formik>
           <p className="mt-4">
             Don’t have an account?
-            <span className="font-bold text-Red-500 ml-2">
-              <Link href={"/register"}>Register</Link>
+            <span
+              className="font-bold text-Red-500 ml-2 cursor-pointer"
+              onClick={clickRegister}
+            >
+              Register
             </span>
           </p>
         </div>

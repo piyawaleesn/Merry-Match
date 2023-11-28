@@ -10,6 +10,159 @@ export default function RegisterStep1() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [errors, setErrors] = useState({
+    name: "",
+    birthDate: "",
+    location: "",
+    city: "",
+    username: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+  });
+
+  const validateName = () => {
+    if (!name) {
+      setErrors((prevErrors) => ({
+        ...prevErrors,
+        name: "required",
+      }));
+    } else if (!/^[ก-ฮa-zA-Z]+$/.test(name)) {
+      setErrors((prevErrors) => ({
+        ...prevErrors,
+        name: "Please fill out ก-ฮ A-Z and a-z only.",
+      }));
+    } else {
+      setErrors((prevErrors) => ({
+        ...prevErrors,
+        name: "",
+      }));
+    }
+  };
+
+  const validateBirthDate = () => {
+    const currentDate = new Date();
+    const inputDate = new Date(birthDate);
+    if (!birthDate) {
+      setErrors((prevErrors) => ({
+        ...prevErrors,
+        birthDate: "required",
+      }));
+    } else if (
+      inputDate >= currentDate ||
+      currentDate.getFullYear() - inputDate.getFullYear() < 18
+    ) {
+      setErrors((prevErrors) => ({
+        ...prevErrors,
+        birthDate:
+          "The user must be over 18 years of age, and birthdays cannot be in the future.",
+      }));
+    } else {
+      setErrors((prevErrors) => ({
+        ...prevErrors,
+        birthDate: "",
+      }));
+    }
+  };
+
+  const validateLocation = () => {
+    if (!location) {
+      setErrors((prevErrors) => ({
+        ...prevErrors,
+        location: "required",
+      }));
+    } else {
+      setErrors((prevErrors) => ({ ...prevErrors, location: "" }));
+    }
+  };
+
+  const validateCity = () => {
+    if (!city) {
+      setErrors((prevErrors) => ({
+        ...prevErrors,
+        city: "required",
+      }));
+    } else {
+      setErrors((prevErrors) => ({ ...prevErrors, city: "" }));
+    }
+  };
+
+  const validateUsername = () => {
+    if (!username) {
+      setErrors((prevErrors) => ({
+        ...prevErrors,
+        username: "required",
+      }));
+    } else if (!/^[ก-ฮa-zA-Z0-9]{6,}$/.test(username)) {
+      setErrors((prevErrors) => ({
+        ...prevErrors,
+        username:
+          "The username must be letters ก-ฮ, A-Z, a-z or numbers, and it must be at least 6 characters.",
+      }));
+    } else {
+      setErrors((prevErrors) => ({
+        ...prevErrors,
+        username: "",
+      }));
+    }
+  };
+
+  const validateEmail = () => {
+    if (!email) {
+      setErrors((prevErrors) => ({
+        ...prevErrors,
+        email: "required",
+      }));
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      setErrors((prevErrors) => ({
+        ...prevErrors,
+        email: "Format email incorrect",
+      }));
+    } else {
+      setErrors((prevErrors) => ({
+        ...prevErrors,
+        email: "",
+      }));
+    }
+  };
+
+  const validatePassword = () => {
+    if (!password) {
+      setErrors((prevErrors) => ({
+        ...prevErrors,
+        password: "required",
+      }));
+    } else if (password.length < 8) {
+      setErrors((prevErrors) => ({
+        ...prevErrors,
+        password: "Password must be at least 8 characters",
+      }));
+    } else {
+      setErrors((prevErrors) => ({
+        ...prevErrors,
+        password: "",
+      }));
+    }
+  };
+
+  const validateConfirmPassword = () => {
+    if (!confirmPassword) {
+      setErrors((prevErrors) => ({
+        ...prevErrors,
+        confirmPassword: "required",
+      }));
+    } else if (confirmPassword !== password) {
+      setErrors((prevErrors) => ({
+        ...prevErrors,
+        confirmPassword: "Confirm password don't match.",
+      }));
+    } else {
+      setErrors((prevErrors) => ({
+        ...prevErrors,
+        confirmPassword: "",
+      }));
+    }
+  };
 
   const handleLocationChange = (e) => {
     setLocation(e.target.value);
@@ -69,8 +222,20 @@ export default function RegisterStep1() {
                   name="name"
                   placeholder="John Doe"
                   className="border-Gray-400 border rounded-md w-[420px] h-[40px] pl-2 text-sm"
-                  required
+                  value={name}
+                  onChange={(event) => {
+                    setName(event.target.value);
+                    validateName();
+                  }}
+                  onBlur={() => {
+                    validateName();
+                  }}
                 />
+                {errors.name && (
+                  <p className="text-Red-500 text-xs mt-1 absolute top-[52.5%]">
+                    {errors.name}
+                  </p>
+                )}
               </div>
               <div className="flex flex-col ml-[15px]">
                 <label htmlFor="birthDate" className="text-sm">
@@ -78,9 +243,21 @@ export default function RegisterStep1() {
                 </label>
                 <input
                   type="date"
-                  className="border-Gray-400 border rounded-md w-[420px] h-[40px]"
-                  required
+                  className="border-Gray-400 border rounded-md w-[420px] h-[40px] pl-2 pr-3"
+                  value={birthDate}
+                  onChange={(e) => {
+                    setBirthDate(e.target.value);
+                    validateBirthDate();
+                  }}
+                  onBlur={() => {
+                    validateBirthDate();
+                  }}
                 />
+                {errors.birthDate && (
+                  <p className="text-Red-500 text-xs mt-1 absolute top-[52.5%]">
+                    {errors.birthDate}
+                  </p>
+                )}
               </div>
             </div>
             <div className="flex mt-5">
@@ -93,8 +270,14 @@ export default function RegisterStep1() {
                   name="location"
                   className="border-Gray-400 border rounded-md w-[420px] h-[40px] pl-2 text-sm focus:outline-none focus:border-Red-500"
                   value={location}
-                  onChange={handleLocationChange}
-                  required
+                  onChange={(e) => {
+                    handleLocationChange(e);
+                    setLocation(e.target.value);
+                    validateLocation();
+                  }}
+                  onBlur={() => {
+                    validateLocation();
+                  }}
                 >
                   <option value="" hidden>
                     --Select Location--
@@ -106,6 +289,11 @@ export default function RegisterStep1() {
                       </option>
                     ))}
                 </select>
+                {errors.location && (
+                  <p className="text-Red-500 text-xs mt-1 absolute top-[64%]">
+                    {errors.location}
+                  </p>
+                )}
               </div>
               <div className="flex flex-col ml-[15px]">
                 <label htmlFor="city" className="text-sm">
@@ -116,8 +304,14 @@ export default function RegisterStep1() {
                   name="city"
                   className="border-Gray-400 border rounded-md w-[420px] h-[40px] pl-2 text-sm"
                   value={city}
-                  onChange={handleCityChange}
-                  required
+                  onChange={(e) => {
+                    handleCityChange(e);
+                    setCity(e.target.value);
+                    validateCity();
+                  }}
+                  onBlur={() => {
+                    validateCity();
+                  }}
                 >
                   <option value="" hidden>
                     --Select City--
@@ -130,6 +324,11 @@ export default function RegisterStep1() {
                         {state.state_name}
                       </option>
                     ))}
+                  {errors.city && (
+                    <p className="text-Red-500 text-xs mt-1 absolute top-[64%]">
+                      {errors.city}
+                    </p>
+                  )}
                 </select>
               </div>
             </div>
@@ -144,8 +343,20 @@ export default function RegisterStep1() {
                   name="name"
                   placeholder="At least 6 charactor"
                   className="border-Gray-400 border rounded-md w-[420px] h-[40px] pl-2 text-sm"
-                  required
+                  value={username}
+                  onChange={(e) => {
+                    setUsername(e.target.value);
+                    validateUsername();
+                  }}
+                  onBlur={() => {
+                    validateUsername();
+                  }}
                 />
+                {errors.username && (
+                  <p className="text-Red-500 text-xs mt-1 absolute top-[75.5%]">
+                    {errors.username}
+                  </p>
+                )}
               </div>
               <div className="flex flex-col ml-[15px]">
                 <label htmlFor="name" className="text-sm">
@@ -157,8 +368,20 @@ export default function RegisterStep1() {
                   name="name"
                   placeholder="name@website.com"
                   className="border-Gray-400 border rounded-md w-[420px] h-[40px] pl-2 text-sm"
-                  required
+                  value={email}
+                  onChange={(e) => {
+                    setEmail(e.target.value);
+                    validateEmail();
+                  }}
+                  onBlur={() => {
+                    validateEmail();
+                  }}
                 />
+                {errors.email && (
+                  <p className="text-Red-500 text-xs mt-1 absolute top-[75.5%]">
+                    {errors.email}
+                  </p>
+                )}
               </div>
             </div>
             <div className="flex mt-5">
@@ -172,8 +395,20 @@ export default function RegisterStep1() {
                   name="name"
                   placeholder="At least 8 charactor"
                   className="border-Gray-400 border rounded-md w-[420px] h-[40px] pl-2 text-sm"
-                  required
+                  value={password}
+                  onChange={(e) => {
+                    setPassword(e.target.value);
+                    validatePassword();
+                  }}
+                  onBlur={() => {
+                    validatePassword();
+                  }}
                 />
+                {errors.password && (
+                  <p className="text-Red-500 text-xs mt-1 absolute top-[87%]">
+                    {errors.password}
+                  </p>
+                )}
               </div>
               <div className="flex flex-col ml-[15px]">
                 <label htmlFor="name" className="text-sm">
@@ -185,8 +420,20 @@ export default function RegisterStep1() {
                   name="name"
                   placeholder="At least 8 charactor"
                   className="border-Gray-400 border rounded-md w-[420px] h-[40px] pl-2 text-sm"
-                  required
+                  value={confirmPassword}
+                  onChange={(e) => {
+                    setConfirmPassword(e.target.value);
+                    validateConfirmPassword();
+                  }}
+                  onBlur={() => {
+                    validateConfirmPassword();
+                  }}
                 />
+                {errors.confirmPassword && (
+                  <p className="text-Red-500 text-xs mt-1 absolute top-[87%]">
+                    {errors.confirmPassword}
+                  </p>
+                )}
               </div>
             </div>
           </form>
