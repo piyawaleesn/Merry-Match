@@ -1,6 +1,11 @@
 import React from "react";
 
-export default function FooterRegister({ onNextStep, onBack, currentStep }) {
+export default function FooterRegister({
+  onNextStep,
+  onBack,
+  currentStep,
+  onSubmit,
+}) {
   return (
     <div className="w-screen h-[90px] border-t border-Gray-300 bg-white">
       <div className="flex justify-between">
@@ -15,7 +20,11 @@ export default function FooterRegister({ onNextStep, onBack, currentStep }) {
             Back
           </button>
           {currentStep === 3 ? (
-            <button className="bg-Red-500 border border-Red-500 rounded-3xl w-[120px] h-[45px] text-white font-bold hover:bg-Red-600">
+            <button
+              className="bg-Red-500 border border-Red-500 rounded-3xl w-[120px] h-[45px] text-white font-bold hover:bg-Red-600"
+              type="submit"
+              onClick={onSubmit}
+            >
               Confirm
             </button>
           ) : (

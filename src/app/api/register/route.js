@@ -2,60 +2,24 @@ import prisma from "@/src/app/lib/prisma";
 import bcrypt, { hash } from "bcrypt";
 import { NextResponse } from "next/server";
 
-// export async function POST(req) {
-//   const body = await req.json();
-//   const {
-//     // name,
-//     // username,
-//     email,
-//     password,
-//     // date_of_birth,
-//     // location,
-//     // city,
-//     // sexual_identity,
-//     // sexual_preference,
-//     // recial_preference,
-//     // meeting_interests,
-//     // hobbies_interests,
-//     // profile_image,
-//     // role,
-//   } = body;
-//   const hashedPassword = await bcrypt.hash(password, 10);
-
-//   try {
-//     const newUser = await prisma.user.create({
-//       data: {
-//         // name,
-//         // username,
-//         email,
-//         password: hashedPassword,
-//         // date_of_birth,
-//         // location,
-//         // city,
-//         // sexual_identity,
-//         // sexual_preference,
-//         // recial_preference,
-//         // meeting_interests,
-//         // hobbies_interests,
-//         // profile_image,
-//         // role: "user",
-//       },
-//     });
-
-//     return NextResponse.json(
-//       { message: "Register successfully", newUser },
-//       { status: 201 }
-//     );
-//   } catch (error) {
-//     console.log("Register error", error);
-//     return NextResponse.error({ error: "Failed to register" }, { status: 400 });
-//   }
-// }
-
 export async function POST(req) {
   try {
     const body = await req.json();
-    const { email, password } = body;
+    const {
+      name,
+      username,
+      email,
+      password,
+      date_of_birth,
+      location,
+      city,
+      sexual_identity,
+      sexual_preference,
+      recial_preference,
+      meeting_interests,
+      hobbies_interests,
+      profile_image,
+    } = body;
 
     const existingUserByEmail = await prisma.users.findUnique({
       where: { email: email },
@@ -69,7 +33,21 @@ export async function POST(req) {
 
     const hashedPassword = await hash(password, 10);
     const newUser = await prisma.users.create({
-      data: { email, password: hashedPassword },
+      data: {
+        name: name,
+        username: username,
+        email: email,
+        password: hashedPassword,
+        date_of_birth: date_of_birth,
+        location: location,
+        city: city,
+        sexual_identity: sexual_identity,
+        sexual_preference: sexual_preference,
+        recial_preference: recial_preference,
+        meeting_interests: meeting_interests,
+        hobbies_interests: hobbies_interests,
+        profile_image: profile_image,
+      },
     });
 
     return NextResponse.json(

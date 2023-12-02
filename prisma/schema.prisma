@@ -12,17 +12,17 @@ datasource db {
 
 model Users {
   id                Int          @id @default(autoincrement())
-  name              String?
-  username          String?
+  name              String
+  username          String
   email             String       @unique
   password          String
-  date_of_birth     DateTime?    @db.Date
-  location          String?
-  city              String?
-  sexual_identity   String?
-  sexual_preference String?
-  recial_preference String?
-  meeting_interests String?
+  date_of_birth     String
+  location          String
+  city              String
+  sexual_identity   String
+  sexual_preference String
+  recial_preference String
+  meeting_interests String
   hobbies_interests String[]
   profile_image     String[]
   about_me          String?

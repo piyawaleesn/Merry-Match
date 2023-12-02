@@ -1,6 +1,38 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 
 export default function RegisterStep3() {
+  const [images, setImages] = useState([]);
+  const [selectImage, setSelectImage] = useState(null);
+
+  const clickRemoveImage = (id) => {
+    const imageId = id;
+
+    const imageDelete = images.filter((value, id) => {
+      return id !== imageId;
+    });
+
+    setImages(imageDelete);
+    setSelectImage(null);
+  };
+
+  const handlerImageChange = (e) => {
+    const file = e.target.files[0];
+
+    if (file) {
+      const reader = new FileReader();
+
+      reader.onloadend = () => {
+        setImages((prevImage) => [...prevImage, reader.result]);
+        setSelectImage(reader.result);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  useEffect(() => {
+    console.log(images);
+  }, [images]);
+
   return (
     <div className="flex justify-center">
       <div className="w-[930px] h-[500px] flex flex-col mt-[130px]">
@@ -41,21 +73,136 @@ export default function RegisterStep3() {
             Upload at least 2 photos
           </p>
           <div className="flex">
-            <div className="w-[140px] h-[140px] mr-6">
-              <img src="https://hzhhjgfmkxwvwsdteigk.supabase.co/storage/v1/object/sign/user-storage/icons/RegisPicBox.svg?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJ1c2VyLXN0b3JhZ2UvaWNvbnMvUmVnaXNQaWNCb3guc3ZnIiwiaWF0IjoxNzAwODM2NDQxLCJleHAiOjE3MzIzNzI0NDF9.2TtI9G28c40BMYlz4a5-ZbaXvk_q0Cq7YZiS0H5k32g&t=2023-11-24T14%3A34%3A02.174Z" />
-            </div>
-            <div className="w-[140px] h-[140px] mr-6">
-              <img src="https://hzhhjgfmkxwvwsdteigk.supabase.co/storage/v1/object/sign/user-storage/icons/RegisPicBox.svg?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJ1c2VyLXN0b3JhZ2UvaWNvbnMvUmVnaXNQaWNCb3guc3ZnIiwiaWF0IjoxNzAwODM2NDQxLCJleHAiOjE3MzIzNzI0NDF9.2TtI9G28c40BMYlz4a5-ZbaXvk_q0Cq7YZiS0H5k32g&t=2023-11-24T14%3A34%3A02.174Z" />
-            </div>
-            <div className="w-[140px] h-[140px] mr-6">
-              <img src="https://hzhhjgfmkxwvwsdteigk.supabase.co/storage/v1/object/sign/user-storage/icons/RegisPicBox.svg?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJ1c2VyLXN0b3JhZ2UvaWNvbnMvUmVnaXNQaWNCb3guc3ZnIiwiaWF0IjoxNzAwODM2NDQxLCJleHAiOjE3MzIzNzI0NDF9.2TtI9G28c40BMYlz4a5-ZbaXvk_q0Cq7YZiS0H5k32g&t=2023-11-24T14%3A34%3A02.174Z" />
-            </div>
-            <div className="w-[140px] h-[140px] mr-6">
-              <img src="https://hzhhjgfmkxwvwsdteigk.supabase.co/storage/v1/object/sign/user-storage/icons/RegisPicBox.svg?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJ1c2VyLXN0b3JhZ2UvaWNvbnMvUmVnaXNQaWNCb3guc3ZnIiwiaWF0IjoxNzAwODM2NDQxLCJleHAiOjE3MzIzNzI0NDF9.2TtI9G28c40BMYlz4a5-ZbaXvk_q0Cq7YZiS0H5k32g&t=2023-11-24T14%3A34%3A02.174Z" />
-            </div>
-            <div className="w-[140px] h-[140px]">
-              <img src="https://hzhhjgfmkxwvwsdteigk.supabase.co/storage/v1/object/sign/user-storage/icons/RegisPicBox.svg?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJ1c2VyLXN0b3JhZ2UvaWNvbnMvUmVnaXNQaWNCb3guc3ZnIiwiaWF0IjoxNzAwODM2NDQxLCJleHAiOjE3MzIzNzI0NDF9.2TtI9G28c40BMYlz4a5-ZbaXvk_q0Cq7YZiS0H5k32g&t=2023-11-24T14%3A34%3A02.174Z" />
-            </div>
+            {images.length < 1 ? (
+              <label className="w-[140px] h-[140px] mr-6 cursor-pointer bg-Gray-200 text-sm text-Purple-600 rounded-xl flex flex-col items-center justify-center">
+                <span className="text-3xl text-Purple-600 ">+</span>
+                upload photo
+                <input
+                  type="file"
+                  className="hidden"
+                  onChange={handlerImageChange}
+                />
+              </label>
+            ) : (
+              <>
+                <div className="w-[140px] h-[140px] mr-6 rounded-xl relative">
+                  <img
+                    src={images[0]}
+                    className="rounded-xl w-[140px] h-[140px] bg-cover"
+                  />
+                </div>
+                <div
+                  className="cursor-pointer bg-Red-500 w-[1.3rem] h-[1.3rem] absolute top-[54%] left-[25%] rounded-full flex justify-center items-center text-lg text-white font-bold"
+                  onClick={() => clickRemoveImage(0)}
+                >
+                  -
+                </div>
+              </>
+            )}
+            {images.length < 2 ? (
+              <label className="w-[140px] h-[140px] mr-6 cursor-pointer bg-Gray-200 text-sm text-Purple-600 rounded-xl flex flex-col items-center justify-center">
+                <span className="text-3xl text-Purple-600 ">+</span>
+                upload photo
+                <input
+                  type="file"
+                  className="hidden"
+                  onChange={handlerImageChange}
+                />
+              </label>
+            ) : (
+              <>
+                <div className="w-[140px] h-[140px] mr-6 rounded-xl relative">
+                  <img
+                    src={images[1]}
+                    className="rounded-xl w-[140px] h-[140px] bg-cover"
+                  />
+                </div>
+                <div
+                  className="cursor-pointer bg-Red-500 w-[1.3rem] h-[1.3rem] absolute top-[54%] left-[37%] rounded-full flex justify-center items-center text-lg text-white font-bold"
+                  onClick={() => clickRemoveImage(1)}
+                >
+                  -
+                </div>
+              </>
+            )}
+            {images.length < 3 ? (
+              <label className="w-[140px] h-[140px] mr-6 cursor-pointer bg-Gray-200 text-sm text-Purple-600 rounded-xl flex flex-col items-center justify-center">
+                <span className="text-3xl text-Purple-600 ">+</span>
+                upload photo
+                <input
+                  type="file"
+                  className="hidden"
+                  onChange={handlerImageChange}
+                />
+              </label>
+            ) : (
+              <>
+                <div className="w-[140px] h-[140px] mr-6 rounded-xl relative">
+                  <img
+                    src={images[2]}
+                    className="rounded-xl w-[140px] h-[140px] bg-cover"
+                  />
+                </div>
+                <div
+                  className="cursor-pointer bg-Red-500 w-[1.3rem] h-[1.3rem] absolute top-[54%] left-[49.3%] rounded-full flex justify-center items-center text-lg text-white font-bold"
+                  onClick={() => clickRemoveImage(2)}
+                >
+                  -
+                </div>
+              </>
+            )}
+            {images.length < 4 ? (
+              <label className="w-[140px] h-[140px] mr-6 cursor-pointer bg-Gray-200 text-sm text-Purple-600 rounded-xl flex flex-col items-center justify-center">
+                <span className="text-3xl text-Purple-600 ">+</span>
+                upload photo
+                <input
+                  type="file"
+                  className="hidden"
+                  onChange={handlerImageChange}
+                />
+              </label>
+            ) : (
+              <>
+                <div className="w-[140px] h-[140px] mr-6 rounded-xl relative">
+                  <img
+                    src={images[3]}
+                    className="rounded-xl w-[140px] h-[140px] bg-cover"
+                  />
+                </div>
+                <div
+                  className="cursor-pointer bg-Red-500 w-[1.3rem] h-[1.3rem] absolute top-[54%] left-[61.4%] rounded-full flex justify-center items-center text-lg text-white font-bold"
+                  onClick={() => clickRemoveImage(3)}
+                >
+                  -
+                </div>
+              </>
+            )}
+            {images.length < 5 ? (
+              <label className="w-[140px] h-[140px] cursor-pointer bg-Gray-200 text-sm text-Purple-600 rounded-xl flex flex-col items-center justify-center">
+                <span className="text-3xl text-Purple-600 ">+</span>
+                upload photo
+                <input
+                  type="file"
+                  className="hidden"
+                  onChange={handlerImageChange}
+                />
+              </label>
+            ) : (
+              <>
+                <div className="w-[140px] h-[140px] mr-6 rounded-xl relative">
+                  <img
+                    src={images[4]}
+                    className="rounded-xl w-[140px] h-[140px] bg-cover"
+                  />
+                </div>
+                <div
+                  className="cursor-pointer bg-Red-500 w-[1.3rem] h-[1.3rem] absolute top-[54%] left-[73.4%] rounded-full flex justify-center items-center text-lg text-white font-bold"
+                  onClick={() => clickRemoveImage(4)}
+                >
+                  -
+                </div>
+              </>
+            )}
           </div>
         </div>
       </div>

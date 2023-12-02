@@ -30,7 +30,7 @@ export default function RegisterStep1() {
     } else if (!/^[ก-ฮa-zA-Z]+$/.test(name)) {
       setErrors((prevErrors) => ({
         ...prevErrors,
-        name: "Please fill out ก-ฮ A-Z and a-z only.",
+        name: "Name must be only letters.",
       }));
     } else {
       setErrors((prevErrors) => ({
@@ -55,7 +55,7 @@ export default function RegisterStep1() {
       setErrors((prevErrors) => ({
         ...prevErrors,
         birthDate:
-          "The user must be over 18 years of age, and birthdays cannot be in the future.",
+          "User must be over 18 years old, and birthdays cannot be in the future.",
       }));
     } else {
       setErrors((prevErrors) => ({
@@ -97,7 +97,7 @@ export default function RegisterStep1() {
       setErrors((prevErrors) => ({
         ...prevErrors,
         username:
-          "The username must be letters ก-ฮ, A-Z, a-z or numbers, and it must be at least 6 characters.",
+          "Username must be letters or numbers, and it must be at least 6 characters.",
       }));
     } else {
       setErrors((prevErrors) => ({
@@ -232,7 +232,7 @@ export default function RegisterStep1() {
                   }}
                 />
                 {errors.name && (
-                  <p className="text-Red-500 text-xs mt-1 absolute top-[52.5%]">
+                  <p className="text-Red-500 text-xs mt-2 ml-2 absolute top-[52.5%]">
                     {errors.name}
                   </p>
                 )}
@@ -254,7 +254,7 @@ export default function RegisterStep1() {
                   }}
                 />
                 {errors.birthDate && (
-                  <p className="text-Red-500 text-xs mt-1 absolute top-[52.5%]">
+                  <p className="text-Red-500 text-xs mt-2 ml-2 absolute top-[52.5%]">
                     {errors.birthDate}
                   </p>
                 )}
@@ -290,7 +290,7 @@ export default function RegisterStep1() {
                     ))}
                 </select>
                 {errors.location && (
-                  <p className="text-Red-500 text-xs mt-1 absolute top-[64%]">
+                  <p className="text-Red-500 text-xs mt-2 ml-2 absolute top-[64%]">
                     {errors.location}
                   </p>
                 )}
@@ -325,7 +325,7 @@ export default function RegisterStep1() {
                       </option>
                     ))}
                   {errors.city && (
-                    <p className="text-Red-500 text-xs mt-1 absolute top-[64%]">
+                    <p className="text-Red-500 text-xs mt-2 ml-2 absolute top-[64%]">
                       {errors.city}
                     </p>
                   )}
@@ -353,7 +353,7 @@ export default function RegisterStep1() {
                   }}
                 />
                 {errors.username && (
-                  <p className="text-Red-500 text-xs mt-1 absolute top-[75.5%]">
+                  <p className="text-Red-500 text-xs mt-2 ml-2 absolute top-[75.5%]">
                     {errors.username}
                   </p>
                 )}
@@ -378,7 +378,7 @@ export default function RegisterStep1() {
                   }}
                 />
                 {errors.email && (
-                  <p className="text-Red-500 text-xs mt-1 absolute top-[75.5%]">
+                  <p className="text-Red-500 text-xs mt-2 ml-2 absolute top-[75.5%]">
                     {errors.email}
                   </p>
                 )}
@@ -405,7 +405,7 @@ export default function RegisterStep1() {
                   }}
                 />
                 {errors.password && (
-                  <p className="text-Red-500 text-xs mt-1 absolute top-[87%]">
+                  <p className="text-Red-500 text-xs mt-2 ml-2 absolute top-[87%]">
                     {errors.password}
                   </p>
                 )}
@@ -430,7 +430,7 @@ export default function RegisterStep1() {
                   }}
                 />
                 {errors.confirmPassword && (
-                  <p className="text-Red-500 text-xs mt-1 absolute top-[87%]">
+                  <p className="text-Red-500 text-xs mt-2 ml-2 absolute top-[87%]">
                     {errors.confirmPassword}
                   </p>
                 )}
