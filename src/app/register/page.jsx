@@ -6,6 +6,7 @@ import Navbar from "../component/Navbar";
 import FooterRegister from "../component/FooterRegister";
 import LocationData from "../mockLocation";
 import { TagsInput } from "react-tag-input-component";
+import { supabase } from "../supabase/supabase";
 
 const Userspage = () => {
   const [name, setName] = useState("");
@@ -316,6 +317,38 @@ const Userspage = () => {
   };
 
   //step 3
+  // const clickRemoveImage = (id, images, setImages, setSelectImage) => {
+  //   const imageId = id;
+  //   const imageDelete = images.filter((value, idx) => {
+  //     return idx !== imageId;
+  //   });
+  //   setImages(imageDelete);
+  //   setSelectImage(null);
+  // };
+
+  // const handlerImageChange = async (event, setImages) => {
+  //   const file = event.target.files[0];
+  //   try {
+  //     if (file) {
+  //       const { data, error } = await supabase.storage
+  //         .from("image-users")
+  //         .upload(`images/${file.name}`, file);
+  //       if (error) {
+  //         console.error("Error uploading file to Supabase Storage", error);
+  //         return;
+  //       }
+  //       if (error) {
+  //         console.error("Error uploading file to Supabase Storage", error);
+  //         return;
+  //       }
+  //       const imageUrl = data.Key;
+  //       setImages((prevImages) => [...prevImages, imageUrl]);
+  //     }
+  //   } catch (error) {
+  //     console.log("Error handling image change", error);
+  //   }
+  // };
+
   const clickRemoveImage = (id) => {
     const imageId = id;
 
@@ -330,14 +363,13 @@ const Userspage = () => {
   const handlerImageChange = (e) => {
     const file = e.target.files[0];
 
-    if (file) {
-      const reader = new FileReader();
-
-      reader.onloadend = () => {
-        setImages((prevImage) => [...prevImage, reader.result]);
-        setSelectImage(reader.result);
-      };
-      reader.readAsDataURL(file);
+    try {
+      if (file) {
+        const objectUrl = URL.createObjectURL(file);
+        setImages((prevImages) => [...prevImages, objectUrl]);
+      }
+    } catch (error) {
+      console.log("error handling image change", error);
     }
   };
 
@@ -885,6 +917,7 @@ const Userspage = () => {
                       <span className="text-3xl text-Purple-600 ">+</span>
                       upload photo
                       <input
+                        id="upload"
                         type="file"
                         className="hidden"
                         onChange={handlerImageChange}

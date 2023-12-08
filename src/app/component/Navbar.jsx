@@ -42,6 +42,11 @@ export default function Navbar() {
     router.push("/matching");
   };
 
+  const onClickProfile = () => {
+    setLoading(true);
+    router.push("/profile");
+  };
+
   if (loading) {
     return <Loading />;
   }
@@ -94,7 +99,10 @@ export default function Navbar() {
                           />
                           More limit Merry!
                         </button>
-                        <div className="h-[37px] w-full flex items-center pl-3 hover:bg-Purple-100 mt-3 cursor-pointer">
+                        <div
+                          className="h-[37px] w-full flex items-center pl-3 hover:bg-Purple-100 mt-3 cursor-pointer"
+                          onClick={onClickProfile}
+                        >
                           <img src="https://hzhhjgfmkxwvwsdteigk.supabase.co/storage/v1/object/sign/user-storage/icons/profile-icon.svg?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJ1c2VyLXN0b3JhZ2UvaWNvbnMvcHJvZmlsZS1pY29uLnN2ZyIsImlhdCI6MTY5NzczMzM2OCwiZXhwIjoxNzI5MjY5MzY4fQ.d4z8MmZC4fc19sFl58uYXhhye0dO-Oxsac1cF5uF0hk&t=2023-10-19T16%3A36%3A08.567Z" />
                           <p className="text-Gray-700 font-medium ml-4">
                             Profile
