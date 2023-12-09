@@ -35,7 +35,7 @@ export default function LinearBuffer() {
 
   return (
     <>
-      <div className="w-full h-screen bg-Red-100 flex flex-col justify-center items-center">
+      <div className="w-screen h-screen overflow-hidden bg-Red-100 flex flex-col justify-center items-center">
         <p className="w-[40%] text-Red-500 text-xl font-bold text-center mb-2">
           Loading
           <span className="text-[0.4rem] text-Red-500 ml-[0.1rem]">

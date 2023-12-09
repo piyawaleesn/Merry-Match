@@ -906,7 +906,7 @@ const Userspage = () => {
               </div>
               <div className="flex flex-col mt-[3.5rem]">
                 <h4 className="text-xl text-Purple-500 font-bold">
-                  Identities and Interests
+                  Profile pictures
                 </h4>
                 <p className="text-Gray-800 text-sm mb-[3rem]">
                   Upload at least 2 photos
