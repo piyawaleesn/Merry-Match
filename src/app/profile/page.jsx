@@ -300,6 +300,23 @@ export default function page() {
       <Navbar />
       <div className="bg-main pt-[5rem]">
         <div className="flex flex-col items-center pb-[5rem]">
+          <div className="flex pt-[5rem]">
+            <div className="flex flex-col mr-[4.5rem]">
+              <p className="text-Beige-700 text-xs">PROFILE</p>
+              <h2 className="text-[43px] text-Purple-500 font-extrabold leading-[3.2rem]">
+                Let’s make profile
+                <br /> to let others know you
+              </h2>
+            </div>
+            <div className="flex items-end">
+              <button className="text-Red-600 font-semibold bg-Red-100 py-[12px] px-[24px] rounded-full h-[48px] w-[160px] hover:bg-Red-500 hover:text-white mr-4">
+                Preview Profile
+              </button>
+              <button className="text-white font-semibold bg-Red-500 py-[12px] px-[24px] rounded-full h-[48px] w-[160px] hover:bg-Red-600">
+                Update Profile
+              </button>
+            </div>
+          </div>
           <div className="flex flex-col mt-[2.5rem]">
             <h4 className="text-xl text-Purple-500 font-bold mb-[1rem]">
               Basic Information
@@ -325,11 +342,11 @@ export default function page() {
                       validateName();
                     }}
                   />
-                  {/* {errors.name && (
-                  <p className="text-Red-500 text-xs mt-2 ml-2 absolute top-[52.5%]">
-                    {errors.name}
-                  </p>
-                )} */}
+                  {errors.name && (
+                    <p className="text-Red-500 text-xs mt-2 ml-2 absolute top-[59.5%]">
+                      {errors.name}
+                    </p>
+                  )}
                 </div>
                 <div className="flex flex-col ml-[15px]">
                   <label htmlFor="birthDate" className="text-sm">
@@ -347,11 +364,11 @@ export default function page() {
                       validateBirthDate();
                     }}
                   />
-                  {/* {errors.birthDate && (
-                  <p className="text-Red-500 text-xs mt-2 ml-2 absolute top-[52.5%]">
-                    {errors.birthDate}
-                  </p>
-                )} */}
+                  {errors.birthDate && (
+                    <p className="text-Red-500 text-xs mt-2 ml-2 absolute top-[59.5%]">
+                      {errors.birthDate}
+                    </p>
+                  )}
                 </div>
               </div>
               <div className="flex mt-5">
@@ -383,11 +400,11 @@ export default function page() {
                         </option>
                       ))}
                   </select>
-                  {/* {errors.location && (
-                  <p className="text-Red-500 text-xs mt-2 ml-2 absolute top-[64%]">
-                    {errors.location}
-                  </p>
-                )} */}
+                  {errors.location && (
+                    <p className="text-Red-500 text-xs mt-2 ml-2 absolute top-[71%]">
+                      {errors.location}
+                    </p>
+                  )}
                 </div>
                 <div className="flex flex-col ml-[15px]">
                   <label htmlFor="city" className="text-sm">
@@ -419,11 +436,11 @@ export default function page() {
                         </option>
                       ))}
                   </select>
-                  {/* {errors.city && (
-                  <p className="text-Red-500 text-xs mt-2 ml-2 absolute top-[64%]">
-                    {errors.city}
-                  </p>
-                )} */}
+                  {errors.city && (
+                    <p className="text-Red-500 text-xs mt-2 ml-2 absolute top-[71%]">
+                      {errors.city}
+                    </p>
+                  )}
                 </div>
               </div>
               <div className="flex mt-5">
@@ -446,11 +463,11 @@ export default function page() {
                       validateUsername();
                     }}
                   />
-                  {/* {errors.username && (
-                  <p className="text-Red-500 text-xs mt-2 ml-2 absolute top-[75.5%]">
-                    {errors.username}
-                  </p>
-                )} */}
+                  {errors.username && (
+                    <p className="text-Red-500 text-xs mt-2 ml-2 absolute top-[83%]">
+                      {errors.username}
+                    </p>
+                  )}
                 </div>
                 <div className="flex flex-col ml-[15px]">
                   <label htmlFor="email" className="text-sm">
@@ -471,11 +488,11 @@ export default function page() {
                       validateEmail();
                     }}
                   />
-                  {/* {errors.email && (
-                  <p className="text-Red-500 text-xs mt-2 ml-2 absolute top-[75.5%]">
-                    {errors.email}
-                  </p>
-                )} */}
+                  {errors.email && (
+                    <p className="text-Red-500 text-xs mt-2 ml-2 absolute top-[83%]">
+                      {errors.email}
+                    </p>
+                  )}
                 </div>
               </div>
               <div className="flex mt-5">
@@ -498,11 +515,11 @@ export default function page() {
                       validatePassword();
                     }}
                   />
-                  {/* {errors.password && (
-                  <p className="text-Red-500 text-xs mt-2 ml-2 absolute top-[87%]">
-                    {errors.password}
-                  </p>
-                )} */}
+                  {errors.password && (
+                    <p className="text-Red-500 text-xs mt-2 ml-2 absolute top-[94.3%]">
+                      {errors.password}
+                    </p>
+                  )}
                 </div>
                 <div className="flex flex-col ml-[15px]">
                   <label htmlFor="confirmPassword" className="text-sm">
@@ -523,11 +540,11 @@ export default function page() {
                       validateConfirmPassword();
                     }}
                   />
-                  {/* {errors.confirmPassword && (
-                  <p className="text-Red-500 text-xs mt-2 ml-2 absolute top-[87%]">
-                    {errors.confirmPassword}
-                  </p>
-                )} */}
+                  {errors.confirmPassword && (
+                    <p className="text-Red-500 text-xs mt-2 ml-2 absolute top-[94.3%]">
+                      {errors.confirmPassword}
+                    </p>
+                  )}
                 </div>
               </div>
             </form>
@@ -560,11 +577,11 @@ export default function page() {
                     <option value="female">Female</option>
                     <option value="lgbtq+">LGBTQ+</option>
                   </select>
-                  {/* {errors.sexualIdentity && (
-                  <p className="text-Red-500 text-xs mt-2 ml-2 absolute top-[52.5%]">
-                    {errors.sexualIdentity}
-                  </p>
-                )} */}
+                  {errors.sexualIdentity && (
+                    <p className="text-Red-500 text-xs mt-2 ml-2 absolute top-[49.8rem]">
+                      {errors.sexualIdentity}
+                    </p>
+                  )}
                 </div>
                 <div className="flex flex-col ml-[15px]">
                   <label htmlFor="name" className="text-sm">
@@ -588,11 +605,11 @@ export default function page() {
                     <option value="female">Female</option>
                     <option value="lgbtq+">LGBTQ+</option>
                   </select>
-                  {/* {errors.sexualPreference && (
-                  <p className="text-Red-500 text-xs mt-2 ml-2 absolute top-[52.5%]">
-                    {errors.sexualPreference}
-                  </p>
-                )} */}
+                  {errors.sexualPreference && (
+                    <p className="text-Red-500 text-xs mt-2 ml-2 absolute top-[49.8rem]">
+                      {errors.sexualPreference}
+                    </p>
+                  )}
                 </div>
               </div>
               <div className="flex mt-5">
@@ -618,11 +635,11 @@ export default function page() {
                     <option value="american">American</option>
                     <option value="europien">Europien</option>
                   </select>
-                  {/* {errors.racialPreference && (
-                  <p className="text-Red-500 text-xs mt-2 ml-2 absolute top-[64%]">
-                    {errors.racialPreference}
-                  </p>
-                )} */}
+                  {errors.racialPreference && (
+                    <p className="text-Red-500 text-xs mt-2 ml-2 absolute top-[54.7rem]">
+                      {errors.racialPreference}
+                    </p>
+                  )}
                 </div>
                 <div className="flex flex-col ml-[15px]">
                   <label htmlFor="name" className="text-sm">
@@ -647,11 +664,11 @@ export default function page() {
                     <option value="fwb">FWB</option>
                     <option value="long-term">Long-term relationship</option>
                   </select>
-                  {/* {errors.meetingInterest && (
-                  <p className="text-Red-500 text-xs mt-2 ml-2 absolute top-[64%]">
-                    {errors.meetingInterest}
-                  </p>
-                )} */}
+                  {errors.meetingInterest && (
+                    <p className="text-Red-500 text-xs mt-2 ml-2 absolute top-[54.7rem]">
+                      {errors.meetingInterest}
+                    </p>
+                  )}
                 </div>
               </div>
 
@@ -670,11 +687,11 @@ export default function page() {
                     onBlur={() => validateHobbies(hobbies)}
                     name="tags"
                   />
-                  {/* {errors.hobbies && (
-                  <p className="text-Red-500 text-xs mt-2 ml-2 absolute top-[75.5%]">
-                    {errors.hobbies}
-                  </p>
-                )} */}
+                  {errors.hobbies && (
+                    <p className="text-Red-500 text-xs mt-2 ml-2 absolute top-[60.2rem]">
+                      {errors.hobbies}
+                    </p>
+                  )}
                 </div>
               </div>
             </form>
@@ -686,7 +703,7 @@ export default function page() {
             <p className="text-Gray-800 text-sm mb-[3rem]">
               Upload at least 2 photos
             </p>
-            <div className="flex mb-[3rem] justify-center">
+            <div className="flex mb-[3rem]">
               {images.length < 1 ? (
                 <label className="w-[140px] h-[140px] mr-6 cursor-pointer bg-Gray-200 text-sm text-Purple-600 rounded-xl flex flex-col items-center justify-center">
                   <span className="text-3xl text-Purple-600 ">+</span>
@@ -707,7 +724,7 @@ export default function page() {
                     />
                   </div>
                   <div
-                    className="cursor-pointer bg-Red-500 w-[1.3rem] h-[1.3rem] absolute top-[54%] left-[25%] rounded-full flex justify-center items-center text-lg text-white font-bold"
+                    className="cursor-pointer bg-Red-500 w-[1.3rem] h-[1.3rem] absolute top-[69.5rem] left-[27.2%] rounded-full flex justify-center items-center text-lg text-white font-bold"
                     onClick={() => clickRemoveImage(0)}
                   >
                     -
@@ -733,7 +750,7 @@ export default function page() {
                     />
                   </div>
                   <div
-                    className="cursor-pointer bg-Red-500 w-[1.3rem] h-[1.3rem] absolute top-[54%] left-[37%] rounded-full flex justify-center items-center text-lg text-white font-bold"
+                    className="cursor-pointer bg-Red-500 w-[1.3rem] h-[1.3rem] absolute top-[69.5rem] left-[39.5%] rounded-full flex justify-center items-center text-lg text-white font-bold"
                     onClick={() => clickRemoveImage(1)}
                   >
                     -
@@ -759,7 +776,7 @@ export default function page() {
                     />
                   </div>
                   <div
-                    className="cursor-pointer bg-Red-500 w-[1.3rem] h-[1.3rem] absolute top-[54%] left-[49.3%] rounded-full flex justify-center items-center text-lg text-white font-bold"
+                    className="cursor-pointer bg-Red-500 w-[1.3rem] h-[1.3rem] absolute top-[69.5rem] left-[51.6%] rounded-full flex justify-center items-center text-lg text-white font-bold"
                     onClick={() => clickRemoveImage(2)}
                   >
                     -
@@ -785,7 +802,7 @@ export default function page() {
                     />
                   </div>
                   <div
-                    className="cursor-pointer bg-Red-500 w-[1.3rem] h-[1.3rem] absolute top-[54%] left-[61.4%] rounded-full flex justify-center items-center text-lg text-white font-bold"
+                    className="cursor-pointer bg-Red-500 w-[1.3rem] h-[1.3rem] absolute top-[69.5rem] left-[63.8%] rounded-full flex justify-center items-center text-lg text-white font-bold"
                     onClick={() => clickRemoveImage(3)}
                   >
                     -
@@ -811,7 +828,7 @@ export default function page() {
                     />
                   </div>
                   <div
-                    className="cursor-pointer bg-Red-500 w-[1.3rem] h-[1.3rem] absolute top-[54%] left-[73.4%] rounded-full flex justify-center items-center text-lg text-white font-bold"
+                    className="cursor-pointer bg-Red-500 w-[1.3rem] h-[1.3rem] absolute top-[69.5rem] left-[75.9%] rounded-full flex justify-center items-center text-lg text-white font-bold"
                     onClick={() => clickRemoveImage(4)}
                   >
                     -
@@ -819,7 +836,7 @@ export default function page() {
                 </>
               )}
             </div>
-            <p className="text-Gray-700 font-bold text-sm ml-[85%] cursor-pointer hover:text-Gray-800">
+            <p className="text-Gray-700 font-bold text-sm ml-[85%] cursor-pointer hover:text-Gray-900">
               Delete account
             </p>
           </div>

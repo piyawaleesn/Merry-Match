@@ -53,7 +53,7 @@ export default function Navbar() {
   return (
     <>
       <div className="fixed left-0 top-0 right-0 z-10">
-        <div className="h-[88px] flex justify-between px-[8rem] shadow-md bg-main">
+        <div className="h-[88px] flex justify-between px-[8rem] shadow-md bg-white">
           <p
             className="text-2xl font-medium flex items-center cursor-pointer hover:scale-110 duration-300"
             onClick={() => router.push("/")}
