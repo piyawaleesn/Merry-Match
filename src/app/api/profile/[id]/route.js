@@ -1,4 +1,3 @@
-import { json } from "stream/consumers";
 import prisma from "../../../lib/prisma";
 import { NextResponse } from "next/server";
 
@@ -67,5 +66,23 @@ export async function PUT(request) {
     });
   } catch (error) {
     console.log("error updating profile", error);
+  }
+}
+
+export async function DELETE(request) {
+  const id = request.url.split("profile/")[1];
+  try {
+    const profileId = Number(id);
+    const profileById = await prisma.users.delete({
+      where: {
+        id: profileId,
+      },
+    });
+    // console.log(profileId);
+    return NextResponse.json({
+      message: "deleted profile successfully",
+    });
+  } catch (error) {
+    console.log("Error to DELETE profile by ID", error);
   }
 }

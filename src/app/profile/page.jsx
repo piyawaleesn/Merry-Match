@@ -5,6 +5,8 @@ import LocationData from "../mockLocation";
 import { TagsInput } from "react-tag-input-component";
 import Navbar from "../component/Navbar";
 import Footer from "../component/Footer";
+import { PopupProfile } from "../component/PopupProfile";
+import { ModalDeleteAccount } from "../component/ModalDeleteAccount";
 
 export default function page() {
   const [name, setName] = useState("");
@@ -37,6 +39,9 @@ export default function page() {
     meetingInterest: "",
     hobbies: "",
   });
+
+  const [showPopup, setShowPopup] = useState(false);
+  const [showModalDelete, setShowModalDelete] = useState(false);
 
   const validateName = () => {
     if (!name) {
@@ -264,7 +269,7 @@ export default function page() {
         hobbies: "",
       }));
     }
-    console.log(tags);
+    // console.log(tags);
   };
 
   const clickRemoveImage = (id) => {
@@ -292,8 +297,26 @@ export default function page() {
   };
 
   useEffect(() => {
-    console.log(images);
+    // console.log(images);
   }, [images]);
+
+  const clickPreviewButton = () => {
+    setShowPopup(true);
+  };
+
+  const clickClosePopup = () => {
+    setShowPopup(false);
+  };
+
+  const clickDeleteAccount = () => {
+    setShowModalDelete(true);
+  };
+
+  const clickCloseModal = () => {
+    setShowModalDelete(false);
+  };
+
+  const clickConfirmDelete = () => {};
 
   return (
     <>
@@ -309,7 +332,10 @@ export default function page() {
               </h2>
             </div>
             <div className="flex items-end">
-              <button className="text-Red-600 font-semibold bg-Red-100 py-[12px] px-[24px] rounded-full h-[48px] w-[160px] hover:bg-Red-500 hover:text-white mr-4">
+              <button
+                className="text-Red-600 font-semibold bg-Red-100 py-[12px] px-[24px] rounded-full h-[48px] w-[160px] hover:bg-Red-500 hover:text-white mr-4"
+                onClick={clickPreviewButton}
+              >
                 Preview Profile
               </button>
               <button className="text-white font-semibold bg-Red-500 py-[12px] px-[24px] rounded-full h-[48px] w-[160px] hover:bg-Red-600">
@@ -553,148 +579,154 @@ export default function page() {
             <h4 className="text-xl text-Purple-500 font-bold mb-[1rem]">
               Identities and Interests
             </h4>
-            <form>
-              <div className="flex">
-                <div className="flex flex-col">
-                  <label htmlFor="name" className="text-sm">
-                    Sexual dentities
-                  </label>
-                  <select
-                    className="border-Gray-400 border rounded-md w-[420px] h-[40px] pl-2 text-sm focus:outline-none focus:border-Red-500"
-                    value={sexualIdentity}
-                    onChange={(e) => {
-                      setSexualIdentity(e.target.value);
-                      validateSexualIdentity();
-                    }}
-                    onBlur={() => {
-                      validateSexualIdentity();
-                    }}
-                  >
-                    <option value="" hidden>
-                      --Select Sexual Identities--
-                    </option>
-                    <option value="male">Male</option>
-                    <option value="female">Female</option>
-                    <option value="lgbtq+">LGBTQ+</option>
-                  </select>
-                  {errors.sexualIdentity && (
-                    <p className="text-Red-500 text-xs mt-2 ml-2 absolute top-[49.8rem]">
-                      {errors.sexualIdentity}
-                    </p>
-                  )}
-                </div>
-                <div className="flex flex-col ml-[15px]">
-                  <label htmlFor="name" className="text-sm">
-                    Sexual preferences
-                  </label>
-                  <select
-                    className="border-Gray-400 border rounded-md w-[420px] h-[40px] pl-2 text-sm focus:outline-none focus:border-Red-500"
-                    value={sexualPreference}
-                    onChange={(e) => {
-                      setSexualPreference(e.target.value);
-                      validateSexualPreference();
-                    }}
-                    onBlur={() => {
-                      validateSexualPreference();
-                    }}
-                  >
-                    <option value="" hidden>
-                      --Select Sexual Preferences--
-                    </option>
-                    <option value="male">Male</option>
-                    <option value="female">Female</option>
-                    <option value="lgbtq+">LGBTQ+</option>
-                  </select>
-                  {errors.sexualPreference && (
-                    <p className="text-Red-500 text-xs mt-2 ml-2 absolute top-[49.8rem]">
-                      {errors.sexualPreference}
-                    </p>
-                  )}
-                </div>
-              </div>
-              <div className="flex mt-5">
-                <div className="flex flex-col">
-                  <label htmlFor="name" className="text-sm">
-                    Racial preferences
-                  </label>
-                  <select
-                    className="border-Gray-400 border rounded-md w-[420px] h-[40px] pl-2 text-sm focus:outline-none focus:border-Red-500"
-                    value={racialPreference}
-                    onChange={(e) => {
-                      setRarialPreference(e.target.value);
-                      validateRacialPreference();
-                    }}
-                    onBlur={() => {
-                      validateRacialPreference();
-                    }}
-                  >
-                    <option value="" hidden>
-                      --Select Racial Preferences--
-                    </option>
-                    <option value="asian">Asian</option>
-                    <option value="american">American</option>
-                    <option value="europien">Europien</option>
-                  </select>
-                  {errors.racialPreference && (
-                    <p className="text-Red-500 text-xs mt-2 ml-2 absolute top-[54.7rem]">
-                      {errors.racialPreference}
-                    </p>
-                  )}
-                </div>
-                <div className="flex flex-col ml-[15px]">
-                  <label htmlFor="name" className="text-sm">
-                    Meeting interests
-                  </label>
-                  <select
-                    className="border-Gray-400 border rounded-md w-[420px] h-[40px] pl-2 text-sm focus:outline-none focus:border-Red-500"
-                    value={meetingInterest}
-                    onChange={(e) => {
-                      setMeetingInterest(e.target.value);
-                      validateMeetingInterest();
-                    }}
-                    onBlur={() => {
-                      validateMeetingInterest(hobbies || []);
-                    }}
-                  >
-                    <option value="" hidden>
-                      --Select Meeting Interests--
-                    </option>
-                    <option value="friend">Friend</option>
-                    <option value="ons">ONS</option>
-                    <option value="fwb">FWB</option>
-                    <option value="long-term">Long-term relationship</option>
-                  </select>
-                  {errors.meetingInterest && (
-                    <p className="text-Red-500 text-xs mt-2 ml-2 absolute top-[54.7rem]">
-                      {errors.meetingInterest}
-                    </p>
-                  )}
-                </div>
-              </div>
 
-              <div className="flex flex-col mt-5">
-                <label htmlFor="text" className="text-sm">
-                  Hobbies / Interests (Maximum 5)
+            <div className="flex">
+              <div className="flex flex-col">
+                <label htmlFor="name" className="text-sm">
+                  Sexual dentities
                 </label>
-                <div className="w-[855px] h-[40px]">
-                  <TagsInput
-                    value={hobbies}
-                    onChange={(tags) => {
-                      console.log(tags);
-                      setHobbies(tags);
-                      validateHobbies(tags);
-                    }}
-                    onBlur={() => validateHobbies(hobbies)}
-                    name="tags"
-                  />
-                  {errors.hobbies && (
-                    <p className="text-Red-500 text-xs mt-2 ml-2 absolute top-[60.2rem]">
-                      {errors.hobbies}
-                    </p>
-                  )}
-                </div>
+                <select
+                  className="border-Gray-400 border rounded-md w-[420px] h-[40px] pl-2 text-sm focus:outline-none focus:border-Red-500"
+                  value={sexualIdentity}
+                  onChange={(e) => {
+                    setSexualIdentity(e.target.value);
+                    validateSexualIdentity();
+                  }}
+                  onBlur={() => {
+                    validateSexualIdentity();
+                  }}
+                >
+                  <option value="" hidden>
+                    --Select Sexual Identities--
+                  </option>
+                  <option value="male">Male</option>
+                  <option value="female">Female</option>
+                  <option value="lgbtq+">LGBTQ+</option>
+                </select>
+                {errors.sexualIdentity && (
+                  <p className="text-Red-500 text-xs mt-2 ml-2 absolute top-[49.8rem]">
+                    {errors.sexualIdentity}
+                  </p>
+                )}
               </div>
-            </form>
+              <div className="flex flex-col ml-[15px]">
+                <label htmlFor="name" className="text-sm">
+                  Sexual preferences
+                </label>
+                <select
+                  className="border-Gray-400 border rounded-md w-[420px] h-[40px] pl-2 text-sm focus:outline-none focus:border-Red-500"
+                  value={sexualPreference}
+                  onChange={(e) => {
+                    setSexualPreference(e.target.value);
+                    validateSexualPreference();
+                  }}
+                  onBlur={() => {
+                    validateSexualPreference();
+                  }}
+                >
+                  <option value="" hidden>
+                    --Select Sexual Preferences--
+                  </option>
+                  <option value="male">Male</option>
+                  <option value="female">Female</option>
+                  <option value="lgbtq+">LGBTQ+</option>
+                </select>
+                {errors.sexualPreference && (
+                  <p className="text-Red-500 text-xs mt-2 ml-2 absolute top-[49.8rem]">
+                    {errors.sexualPreference}
+                  </p>
+                )}
+              </div>
+            </div>
+            <div className="flex mt-5">
+              <div className="flex flex-col">
+                <label htmlFor="name" className="text-sm">
+                  Racial preferences
+                </label>
+                <select
+                  className="border-Gray-400 border rounded-md w-[420px] h-[40px] pl-2 text-sm focus:outline-none focus:border-Red-500"
+                  value={racialPreference}
+                  onChange={(e) => {
+                    setRarialPreference(e.target.value);
+                    validateRacialPreference();
+                  }}
+                  onBlur={() => {
+                    validateRacialPreference();
+                  }}
+                >
+                  <option value="" hidden>
+                    --Select Racial Preferences--
+                  </option>
+                  <option value="asian">Asian</option>
+                  <option value="american">American</option>
+                  <option value="europien">Europien</option>
+                </select>
+                {errors.racialPreference && (
+                  <p className="text-Red-500 text-xs mt-2 ml-2 absolute top-[54.7rem]">
+                    {errors.racialPreference}
+                  </p>
+                )}
+              </div>
+              <div className="flex flex-col ml-[15px]">
+                <label htmlFor="name" className="text-sm">
+                  Meeting interests
+                </label>
+                <select
+                  className="border-Gray-400 border rounded-md w-[420px] h-[40px] pl-2 text-sm focus:outline-none focus:border-Red-500"
+                  value={meetingInterest}
+                  onChange={(e) => {
+                    setMeetingInterest(e.target.value);
+                    validateMeetingInterest();
+                  }}
+                  onBlur={() => {
+                    validateMeetingInterest(hobbies || []);
+                  }}
+                >
+                  <option value="" hidden>
+                    --Select Meeting Interests--
+                  </option>
+                  <option value="friend">Friend</option>
+                  <option value="ons">ONS</option>
+                  <option value="fwb">FWB</option>
+                  <option value="long-term">Long-term relationship</option>
+                </select>
+                {errors.meetingInterest && (
+                  <p className="text-Red-500 text-xs mt-2 ml-2 absolute top-[54.7rem]">
+                    {errors.meetingInterest}
+                  </p>
+                )}
+              </div>
+            </div>
+
+            <div className="flex flex-col mt-5">
+              <label htmlFor="text" className="text-sm">
+                Hobbies / Interests (Maximum 5)
+              </label>
+              <div className="w-[855px] h-[40px]">
+                <TagsInput
+                  value={hobbies}
+                  onChange={(tags) => {
+                    // console.log(tags);
+                    setHobbies(tags);
+                    validateHobbies(tags);
+                  }}
+                  onBlur={() => validateHobbies(hobbies)}
+                  name="tags"
+                />
+                {errors.hobbies && (
+                  <p className="text-Red-500 text-xs mt-2 ml-2 absolute top-[60.2rem]">
+                    {errors.hobbies}
+                  </p>
+                )}
+              </div>
+            </div>
+          </div>
+          <div className="flex flex-col mt-4">
+            <label className="text-sm">About me (Maximum 150 characters)</label>
+            <textarea
+              className="h-[7rem] w-[855px] border border-Gray-400 bg-white rounded-xl pl-3 py-2 resize-none"
+              placeholder="I know nothing... but you"
+            />
           </div>
           <div className="flex flex-col mt-[3.5rem]">
             <h4 className="text-xl text-Purple-500 font-bold w-[865px]">
@@ -724,7 +756,7 @@ export default function page() {
                     />
                   </div>
                   <div
-                    className="cursor-pointer bg-Red-500 w-[1.3rem] h-[1.3rem] absolute top-[69.5rem] left-[27.2%] rounded-full flex justify-center items-center text-lg text-white font-bold"
+                    className="cursor-pointer bg-Red-500 w-[1.3rem] h-[1.3rem] absolute top-[78.6rem] left-[27.2%] rounded-full flex justify-center items-center text-lg text-white font-bold"
                     onClick={() => clickRemoveImage(0)}
                   >
                     -
@@ -750,7 +782,7 @@ export default function page() {
                     />
                   </div>
                   <div
-                    className="cursor-pointer bg-Red-500 w-[1.3rem] h-[1.3rem] absolute top-[69.5rem] left-[39.5%] rounded-full flex justify-center items-center text-lg text-white font-bold"
+                    className="cursor-pointer bg-Red-500 w-[1.3rem] h-[1.3rem] absolute top-[78.6rem] left-[39.5%] rounded-full flex justify-center items-center text-lg text-white font-bold"
                     onClick={() => clickRemoveImage(1)}
                   >
                     -
@@ -776,7 +808,7 @@ export default function page() {
                     />
                   </div>
                   <div
-                    className="cursor-pointer bg-Red-500 w-[1.3rem] h-[1.3rem] absolute top-[69.5rem] left-[51.6%] rounded-full flex justify-center items-center text-lg text-white font-bold"
+                    className="cursor-pointer bg-Red-500 w-[1.3rem] h-[1.3rem] absolute top-[78.6rem] left-[51.6%] rounded-full flex justify-center items-center text-lg text-white font-bold"
                     onClick={() => clickRemoveImage(2)}
                   >
                     -
@@ -802,7 +834,7 @@ export default function page() {
                     />
                   </div>
                   <div
-                    className="cursor-pointer bg-Red-500 w-[1.3rem] h-[1.3rem] absolute top-[69.5rem] left-[63.8%] rounded-full flex justify-center items-center text-lg text-white font-bold"
+                    className="cursor-pointer bg-Red-500 w-[1.3rem] h-[1.3rem] absolute top-[78.6rem] left-[63.8%] rounded-full flex justify-center items-center text-lg text-white font-bold"
                     onClick={() => clickRemoveImage(3)}
                   >
                     -
@@ -828,7 +860,7 @@ export default function page() {
                     />
                   </div>
                   <div
-                    className="cursor-pointer bg-Red-500 w-[1.3rem] h-[1.3rem] absolute top-[69.5rem] left-[75.9%] rounded-full flex justify-center items-center text-lg text-white font-bold"
+                    className="cursor-pointer bg-Red-500 w-[1.3rem] h-[1.3rem] absolute top-[78.6rem] left-[75.9%] rounded-full flex justify-center items-center text-lg text-white font-bold"
                     onClick={() => clickRemoveImage(4)}
                   >
                     -
@@ -836,13 +868,22 @@ export default function page() {
                 </>
               )}
             </div>
-            <p className="text-Gray-700 font-bold text-sm ml-[85%] cursor-pointer hover:text-Gray-900">
+            <p
+              className="text-Gray-700 font-bold text-sm ml-[85%] cursor-pointer hover:text-Gray-900"
+              onClick={clickDeleteAccount}
+            >
               Delete account
             </p>
           </div>
         </div>
       </div>
       <Footer />
+      <PopupProfile isOpen={showPopup} onRequestClose={clickClosePopup} />
+      <ModalDeleteAccount
+        isOpen={showModalDelete}
+        onRequestClose={clickCloseModal}
+        confirmDelete={clickConfirmDelete}
+      />
     </>
   );
 }

@@ -15,6 +15,8 @@ export default function page() {
     router.push("/admin/packageList");
   };
 
+  const clickCreate = () => {};
+
   const onClickAdd = () => {
     // เพิ่มรายละเอียดใหม่เข้าไปในรายการ
     setDetails([...details, ""]);
