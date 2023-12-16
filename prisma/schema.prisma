@@ -49,6 +49,7 @@ model Packages {
   icon       String
   name       String
   limit      Int
+  details    String[]
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
   userId     Int

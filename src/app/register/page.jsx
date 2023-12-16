@@ -5,8 +5,8 @@ import { useRouter } from "next/navigation";
 import Navbar from "../component/Navbar";
 import FooterRegister from "../component/FooterRegister";
 import LocationData from "../mockLocation";
-import { TagsInput } from "react-tag-input-component";
-import { supabase } from "../supabase/supabase";
+// import { TagsInput } from "react-tag-input-component";
+// import { supabase } from "../supabase/supabase";
 
 const Userspage = () => {
   const [name, setName] = useState("");
@@ -79,7 +79,7 @@ const Userspage = () => {
       axios
         .post("api/register", data)
         .then((response) => console.log(response))
-        .catch((error) => console.log("register error from server", error))
+        .catch((error) => console.log("register error from FE", error))
         .finally(() => router.push("/login"));
     } catch (error) {
       console.log("register error", error);
@@ -842,7 +842,7 @@ const Userspage = () => {
                       Hobbies / Interests (Maximum 5)
                     </label>
                     <div className="w-[855px] h-[40px]">
-                      <TagsInput
+                      {/* <TagsInput
                         value={hobbies}
                         onChange={(tags) => {
                           console.log(tags);
@@ -851,7 +851,7 @@ const Userspage = () => {
                         }}
                         onBlur={() => validateHobbies(hobbies)}
                         name="tags"
-                      />
+                      /> */}
                       {errors.hobbies && (
                         <p className="text-Red-500 text-xs mt-2 ml-2 absolute top-[75.5%]">
                           {errors.hobbies}
